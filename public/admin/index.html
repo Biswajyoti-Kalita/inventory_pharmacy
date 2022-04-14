@@ -1,0 +1,125 @@
+
+
+
+				<html>
+				  <head>
+				    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				    <link
+				      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+				      rel="stylesheet"
+				      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+				      crossorigin="anonymous"
+				    />
+
+				    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+				    <script
+				      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+				      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+				      crossorigin="anonymous"
+				    ></script>
+				    <script src="../js/cookie.umd.min.js"></script>
+					<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">    
+
+				  </head>
+				  <body class="bg-light">
+
+
+				  	<div class="row justify-content-md-center m-2 mt-5">
+				  		<div class="col-md-4 text-center">
+				  			<h4 class="text-center mt-5">Umbrella Solution</h4>
+				  			<div class="card shadow p-3 pb-4">
+						          <form action="#" class="form" id="loginForm">
+						            <h4>LOGIN</h4>
+							        <div class="input-group mt-2 mb-3">
+							            <input
+							              type="email"
+							              class="form-control"
+							              placeholder="Email id"
+							              id="email"
+							              required
+							            />
+							          <div class="input-group-append">
+							            <div class="input-group-text">
+							              <span class="fas fa-envelope"></span>
+							            </div>
+							          </div>
+						            </div>
+							        <div class="input-group mb-3">
+							            <input
+							              type="password"
+							              class="form-control"
+							              placeholder="Password"
+							              id="password"
+							              required
+							            />
+							          <div class="input-group-append">
+							            <div class="input-group-text">
+							              <span class="fas fa-lock"></span>
+							            </div>
+							          </div>
+							        </div>						            
+						            <button class="btn btn-primary btn-sm ml-2 btn-block">LOGIN</button>
+						          </form>
+
+
+				  			</div>
+
+				  		</div>
+				  	</div>
+
+
+
+				    <script>
+				      $("#loginForm").on("submit", (ev) => {
+				        ev.preventDefault();
+				        $.ajax({
+				          type: "POST",
+				          url: "/admin/login",
+				          data: {
+				            email: $("#email").val(),
+				            password: $("#password").val(),
+				            role_id : 0
+				          },
+				          success: (response) => {
+				            console.log(response);
+				            if (response.status == "success") {
+				              Cookies.set("token", response.token);
+				              location.href = response.redirect;
+				            } else {
+				              alert(response.message);
+				            }
+				          },
+				          fail: (err) => {
+				            console.log(err);
+				          },
+				        });
+				      });
+				    </script>
+				    <style type="text/css">
+				    	.input-group-text {
+				    		height: 100%;
+				    		background-color: white;
+				    	}
+				    	.input-group input {
+				    		border-right: 0px;
+				    		font-size: 14px;
+				    	}
+				    	.btn-block {
+				    		width: 100%;
+				    		font-size: 14px;
+				    	}
+				    	.input-group-text span{
+				    		border-left: 0px;
+				    		color: #7B7B7B;
+				    	}
+				    	.form {
+				    		color: #555;
+				    	}
+				    	.card {
+				    		border: 1px solid #cdcdf7;
+				    	}
+				    </style>
+				  </body>
+				</html>
+			
+			

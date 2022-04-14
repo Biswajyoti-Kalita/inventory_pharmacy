@@ -1,0 +1,440 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="utf-8">
+          <meta
+            name="author"
+            content="Umbrella Solution"
+          />
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Pharmacies purchase_drug</title>
+          <!-- Google Font: Source Sans Pro -->
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+          <!-- Font Awesome Icons -->
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">    
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+          <!-- Theme style -->
+          <link rel="stylesheet" href="./../css/adminlte.css">
+          <link rel="stylesheet" href="./../css/style.css">
+          <script src="./../js/cookie.umd.min.js"></script>
+        </head>
+        <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
+        
+          <!-- Navbar -->
+          <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+              </li>
+            </ul>
+        
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Navbar Search -->
+              <li class="nav-item">
+                <span class="nav-link" onclick="logout()" role="button">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </span>
+              </li>
+            </ul>
+          </nav>
+          <!-- /.navbar -->
+        
+          <!-- Main Sidebar Container -->
+          <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="/" class="brand-link text-center">
+              <span class="brand-text font-weight-light">Umbrella Solution</span>
+            </a>
+        
+            <!-- Sidebar -->
+            <div class="sidebar">
+              <!-- Sidebar user panel (optional) -->
+              <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                  <img src="./../image/default-pic.webp" class="img-circle elevation-2" id="userImage" alt="User Image">
+                </div>
+                <div class="info">
+                  <a href="dashboard.html" class="d-block">Pharmacies</a>
+                </div>
+              </div>
+        
+              <!-- Sidebar Menu -->
+              <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                  <!-- Add icons to the links using the .nav-icon class
+                       with font-awesome or any other icon font library -->
+                  
+    <li class="nav-item">
+    <a href="dashboard.html" class="nav-link">
+      <i class="nav-icon fas fa-columns"></i>
+      <p>
+        Dashboard
+      </p>
+    </a>
+  </li>
+
+  
+	      	<li class="nav-item">
+	            <a href="user.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Users
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="drug.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Drug
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="vendor.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Vendor
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="purchase_drug_item.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Purchase
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="purchase_drug.html" class="nav-link active">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Purchase_drug
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="purchase_return_drug.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Purchase_return_drug
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="order.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Order
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="order_item.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Order_item
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="order_return.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Order_return
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="patient_details.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Patient_details
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="insurance_company.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Insurance_company
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+	      	<li class="nav-item">
+	            <a href="category.html" class="nav-link ">
+	              <i class="nav-icon fas fa-user"></i>
+	              <p>
+                	Category
+	              </p>
+	            </a>
+	        </li>
+ 
+		
+                  <li class="nav-item">
+                    <a href="change_password.html" class="nav-link">
+                      <i class="nav-icon fas fa-key"></i>
+                      <p>
+                        Change Password
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+              <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+          </aside>
+        
+          <!-- Content Wrapper. Contains page content -->
+          <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+              <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-6">
+                    <h3 class="m-0" id="currentMenuTitle" ></h3>
+                  </div><!-- /.col -->
+                </div><!-- /.row -->
+              </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+        
+            <!-- Main content -->
+            <div class="content">
+              
+	
+	      <div class="container-fluid panels" id="menu_purchase_drug" style="  ">
+	      	
+	        <div class="card">
+	          <form id="searchPurchase_drugForm" action="#">
+	          <div class="card-header">
+	            <h3 class="card-title">Filter</h3>
+	          </div>
+	          <div class="card-body">
+	            <div class="row">
+
+		
+		              <div class="col-md-4 col-lg-4">
+		                <div class="form-group">
+		                  <label>Bill Id</label>
+		                  <input type="text" class="form-control" name="bill_id" placeholder="Bill Id"></div>
+		              </div>
+			
+		              <div class="col-md-4 col-lg-4">
+		                <div class="form-group">
+		                  <label>Vendor Id</label>
+		                  <input type="text" class="form-control" name="vendor_id" placeholder="Vendor Id"></div>
+		              </div>
+			
+		              <div class="col-md-4 col-lg-4">
+		                <div class="form-group">
+		                  <label>Purchase Date</label>
+		                  <input type="text" class="form-control" name="purchase_date" placeholder="Purchase Date"></div>
+		              </div>
+			
+	            </div>            
+	          </div>
+	          <div class="card-footer">
+	            <button type="submit" class="btn btn-sm btn-info" >Search</button>
+	          </div>
+	          </form>
+	        </div>
+	        
+	        <div class="card">
+	          <div class="card-header">
+	            <h3 class="card-title mb-1 mt-1">Purchase_drug Table</h3>
+	            <div class="card-tools mb-1 mt-1 row">
+	            	
+		<div class="" >
+		  <button type="submit" class="btn btn-sm btn-danger" style="display: none;" onclick='bulkDelete("Purchase_drug")' id='bulkDeletePurchase_drug' >
+		    <i class="fas fa-trash"></i> 		    
+		  </button>
+		</div>
+	
+	            	
+		<div class="ml-2">
+		  <button type="submit" class="btn btn-sm btn-primary" onclick="exportTable('Purchase_drug')">
+		    <i class="fas fa-file-csv"></i> 
+		  </button>
+		</div>
+	
+	            	
+		<div class="ml-2">
+		  <button type="submit" class="btn btn-sm btn-primary" onclick="addPurchase_drugModal()">
+		    <i class="fas fa-plus-circle"></i> 
+		  </button>
+		</div>
+	
+	              <div class="ml-2">
+	                <select class="btn btn-sm border" onchange="changePurchase_drugsTableLimit(this.value)">
+	                  <option>10</option>
+	                  <option>25</option>
+	                  <option>50</option>
+	                  <option>100</option>
+	                  <option value=''>All</option>
+	                </select>
+	              </div>
+	            </div>
+	          </div>
+	          <div class="card-body">
+		          <div class="table-responsive">
+		            <table class="table table-hover text-nowrap" id="tablePurchase_drug">
+		              <thead id="purchase_drugTableHead">
+		                <tr>
+		                	
+	      <th style="width: 50px;">
+	        <input type="checkbox" id="bulkSelectPurchase_drug" onclick="bulkSelect('Purchase_drug')" name="">
+	      </th>
+		<th><div style="display:flex;"> ID <div style="margin-left: auto;margin-top:3px;">   <i class="bi bi-sort-up sort-icon cursor-p fade-l" style=""  id="idSortASC" onclick="changePurchase_drugsTableOrder('id','ASC')"  ></i> <i class="bi bi-sort-down cursor-p sort-icon fade-l"  id="idSortDESC" onclick="changePurchase_drugsTableOrder('id','DESC')"  ></i> </div> </div></th><th><div style="display:flex;"> Bill Id <div style="margin-left: auto;margin-top:3px;">   <i class="bi bi-sort-up sort-icon cursor-p fade-l" style=""  id="bill_idSortASC" onclick="changePurchase_drugsTableOrder('bill_id','ASC')"  ></i> <i class="bi bi-sort-down cursor-p sort-icon fade-l"  id="bill_idSortDESC" onclick="changePurchase_drugsTableOrder('bill_id','DESC')"  ></i> </div> </div></th><th><div style="display:flex;"> Vendor Id <div style="margin-left: auto;margin-top:3px;">   <i class="bi bi-sort-up sort-icon cursor-p fade-l" style=""  id="vendor_idSortASC" onclick="changePurchase_drugsTableOrder('vendor_id','ASC')"  ></i> <i class="bi bi-sort-down cursor-p sort-icon fade-l"  id="vendor_idSortDESC" onclick="changePurchase_drugsTableOrder('vendor_id','DESC')"  ></i> </div> </div></th><th><div style="display:flex;"> Purchase Date <div style="margin-left: auto;margin-top:3px;">   <i class="bi bi-sort-up sort-icon cursor-p fade-l" style=""  id="purchase_dateSortASC" onclick="changePurchase_drugsTableOrder('purchase_date','ASC')"  ></i> <i class="bi bi-sort-down cursor-p sort-icon fade-l"  id="purchase_dateSortDESC" onclick="changePurchase_drugsTableOrder('purchase_date','DESC')"  ></i> </div> </div></th><th>Action</th>
+		                </tr>
+		              </thead>
+		              <tbody id="purchase_drugTableBody">
+		              </tbody>
+		            </table>
+		          </div>
+		          <div style="float:right;" class="pagination" id="paginationPurchase_drug">
+		          </div>
+
+	          </div>
+	        </div>
+	      </div><!-- /.container-fluid -->
+		
+            </div>
+            <!-- /.content -->
+          </div>
+          <!-- /.content-wrapper -->
+        
+          <!-- Control Sidebar -->
+          <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+              <h5>Title</h5>
+              <p>Sidebar content</p>
+            </div>
+          </aside>
+          <!-- /.control-sidebar -->
+        
+          <!-- Main Footer -->
+          <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+            </div>
+            <!-- Default to the left -->
+            <small>Copyright &copy; 2021 <a href="https://umbrellasolution.in">Umbrella Solution</a>. All rights reserved.</small>
+          </footer>
+        </div>
+        <!-- ./wrapper -->
+        
+        
+        
+        
+        
+        <!--Modals-->
+        
+        
+			<!-- ADD MODAL Purchase_drug -->
+			<div class="modal fade" id="addPurchase_drugModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-sm">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Add Purchase_drug</h5>
+			        <button type="button" class="close" data-bs-dismiss="modal"  data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">×</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			          <form action="#" id="addPurchase_drugForm">
+			          	<label>Bill Id</label>
+						<input type="text" id="addPurchaseDrugBillIdInput" name="bill_id" class="form-control mb-2" placeholder="Bill Id" >
+					<label>Vendor Id</label>
+						<input type="text" id="addPurchaseDrugVendorIdInput" name="vendor_id" class="form-control mb-2" placeholder="Vendor Id" >
+					<label>Purchase Date</label>
+						<input type="date" id="addPurchaseDrugPurchaseDateInput" name="purchase_date" class="form-control mb-2" placeholder="Purchase Date" >
+					<button type="submit" class="btn btn-primary btn-sm mt-2" >Submit</button>
+			          </form>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		
+        
+        
+        
+			<!-- EDIT MODAL Purchase_drug -->
+			<div class="modal fade" id="editPurchase_drugModal" tabindex="-1" aria-labelledby="Purchase_drugModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-sm">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="Purchase_drugModalLabel">Edit Purchase_drug</h5>
+			        <button type="button" class="close" data-bs-dismiss="modal"  data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">×</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			          <form action="#" id="editPurchase_drugForm">
+			          	<label>Bill Id</label>
+						<input type="text" id="editPurchase_drugBillIdInput" name="bill_id" class="form-control mb-2" placeholder="Bill_id" >
+					<label>Vendor Id</label>
+						<input type="text" id="editPurchase_drugVendorIdInput" name="vendor_id" class="form-control mb-2" placeholder="Vendor_id" >
+					<label>Purchase Date</label>
+						<input type="text" id="editPurchase_drugPurchaseDateInput" name="purchase_date" class="form-control mb-2" placeholder="Purchase_date" >
+					<input type='hidden' id= 'editPurchase_drugPurchase_drugId' > <button type="submit" class="btn btn-primary btn-sm mt-2" >Submit</button>
+			          </form>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		
+        
+        
+        <!-- REQUIRED SCRIPTS -->
+        
+        <!-- jQuery -->
+        <script src="./../js/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="./../js/bootstrap.bundle.min.js"></script>
+        <!-- Sweet Alert 4 -->
+        <script src="./../js/sweetalert.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="./../js/adminlte.js"></script>
+        <script src="./../js/dashboard.js"></script>
+        <script src="./../js/common_script.js"></script>
+        <script src="./js/script.js"></script>
+        
+        
+          
+			<script src="./js/purchase_drug.js"></script>
+		
+        
+        </body>
+        </html>
+        
+              

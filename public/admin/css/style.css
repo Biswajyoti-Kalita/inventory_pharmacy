@@ -1,0 +1,22 @@
+.float-r {
+  float: right;
+}
+.ws-nw {
+  white-space: nowrap;
+}
+.img-block {
+  align-items: center;
+}
+.fade-l {
+  color: #aaa;
+}
+.cursor-p {
+  cursor: pointer;
+}
+.nav-item:nth-child(0) {
+  display: none;
+}
+
+.nav-item:nth-child(n + 5) {
+  display: none;
+}

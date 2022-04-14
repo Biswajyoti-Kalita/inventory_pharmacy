@@ -1,0 +1,4800 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="jajirx" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pharmacies Dashboard</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="./../css/adminlte.css" />
+    <link rel="stylesheet" href="./../css/style.css" />
+    <script src="./../js/cookie.umd.min.js"></script>
+  </head>
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"
+              ><i class="fas fa-bars"></i
+            ></a>
+          </li>
+        </ul>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Navbar Search -->
+          <li class="nav-item">
+            <span class="nav-link" onclick="logout()" role="button">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </span>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/" class="brand-link text-center">
+          <span class="brand-text font-weight-light">jajirx</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img
+                src="./../image/default-pic.webp"
+                class="img-circle elevation-2"
+                id="userImage"
+                alt="User Image"
+              />
+            </div>
+            <div class="info">
+              <a href="dashboard.html" class="d-block">Pharmacies</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul
+              class="nav nav-pills nav-sidebar flex-column"
+              data-widget="treeview"
+              role="menu"
+              data-accordion="false"
+            >
+              <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+              <li class="nav-item" style="display: none">
+                <a href="#menu_user" class="nav-link active">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Users</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#menu_drug" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Drug</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#menu_vendor" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Vendor</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#menu_purchase_drug_item" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Purchase</p>
+                </a>
+              </li>
+
+              <li class="nav-item" style="display: none">
+                <a href="#menu_purchase_drug" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Purchase_drug</p>
+                </a>
+              </li>
+
+              <li class="nav-item" style="display: none">
+                <a href="#menu_purchase_return_drug" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Purchase_return_drug</p>
+                </a>
+              </li>
+
+              <li class="nav-item" style="display: none">
+                <a href="#menu_order" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Order</p>
+                </a>
+              </li>
+
+              <li class="nav-item" style="display: none">
+                <a href="#menu_order_item" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Order_item</p>
+                </a>
+              </li>
+
+              <li class="nav-item" style="display: none">
+                <a href="#menu_order_return" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Order_return</p>
+                </a>
+              </li>
+
+              <li class="nav-item" style="display: none">
+                <a href="#menu_patient_details" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Patient_details</p>
+                </a>
+              </li>
+
+              <li class="nav-item" style="display: none">
+                <a href="#change_password" class="nav-link">
+                  <i class="nav-icon fas fa-key"></i>
+                  <p>Change Password</p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h3 class="m-0" id="currentMenuTitle"></h3>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+          <div
+            class="container-fluid panels"
+            id="menu_user"
+            style="display: none"
+          >
+            <div class="card">
+              <form id="searchUserForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>First Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="first_name"
+                          placeholder="First Name"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Last Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="last_name"
+                          placeholder="Last Name"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Phone</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="phone"
+                          placeholder="Phone"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="email"
+                          placeholder="Email"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="password"
+                          placeholder="Password"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Role Id</label>
+
+                        <select class="form-control" name="role_id">
+                          <option value="">All</option>
+                          <option value="0">Admin</option>
+                          <option value="1">Pharmacies</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Users Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("User")'
+                      id="bulkDeleteUser"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('User')"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addUserModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changeUsersTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover text-nowrap" id="tableUser">
+                    <thead id="userTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectUser"
+                            onclick="bulkSelect('User')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changeUsersTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changeUsersTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            First Name
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="first_nameSortASC"
+                                onclick="changeUsersTableOrder('first_name','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="first_nameSortDESC"
+                                onclick="changeUsersTableOrder('first_name','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Last Name
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="last_nameSortASC"
+                                onclick="changeUsersTableOrder('last_name','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="last_nameSortDESC"
+                                onclick="changeUsersTableOrder('last_name','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Phone
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="phoneSortASC"
+                                onclick="changeUsersTableOrder('phone','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="phoneSortDESC"
+                                onclick="changeUsersTableOrder('phone','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Email
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="emailSortASC"
+                                onclick="changeUsersTableOrder('email','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="emailSortDESC"
+                                onclick="changeUsersTableOrder('email','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Role_id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="role_idSortASC"
+                                onclick="changeUsersTableOrder('role_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="role_idSortDESC"
+                                onclick="changeUsersTableOrder('role_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="userTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationUser"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+
+          <div class="container-fluid panels" id="menu_drug" style="">
+            <div class="card">
+              <form id="searchDrugForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Drug Code</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="drug_code"
+                          placeholder="Drug Code"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Drug Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="drug_name"
+                          placeholder="Drug Name"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Drug Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("Drug")'
+                      id="bulkDeleteDrug"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="importDrug('Drug')"
+                    >
+                      <i class="fas fa-file-upload"></i> Bulk
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('Drug')"
+                      style="display: none"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addDrugModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changeDrugsTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover text-nowrap" id="tableDrug">
+                    <thead id="drugTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectDrug"
+                            onclick="bulkSelect('Drug')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changeDrugsTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changeDrugsTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Medication
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="medicationSortASC"
+                                onclick="changeDrugsTableOrder('medication','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="medicationSortDESC"
+                                onclick="changeDrugsTableOrder('medication','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Ingredient
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="ingredientSortASC"
+                                onclick="changeDrugsTableOrder('ingredient','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="ingredientSortDESC"
+                                onclick="changeDrugsTableOrder('ingredient','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Drug Code
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="drug_codeSortASC"
+                                onclick="changeDrugsTableOrder('drug_code','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="drug_codeSortDESC"
+                                onclick="changeDrugsTableOrder('drug_code','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Drug Name
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="drug_nameSortASC"
+                                onclick="changeDrugsTableOrder('drug_name','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="drug_nameSortDESC"
+                                onclick="changeDrugsTableOrder('drug_name','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Available Quantity
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="available_quantitySortASC"
+                                onclick="changeDrugsTableOrder('available_quantity','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="available_quantitySortDESC"
+                                onclick="changeDrugsTableOrder('available_quantity','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Batch No
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="batch_noSortASC"
+                                onclick="changeDrugsTableOrder('batch_no','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="batch_noSortDESC"
+                                onclick="changeDrugsTableOrder('batch_no','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Reorder Quantity
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="reorder_quantitySortASC"
+                                onclick="changeDrugsTableOrder('reorder_quantity','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="reorder_quantitySortDESC"
+                                onclick="changeDrugsTableOrder('reorder_quantity','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Expiration Date
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="expiration_dateSortASC"
+                                onclick="changeDrugsTableOrder('expiration_date','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="expiration_dateSortDESC"
+                                onclick="changeDrugsTableOrder('expiration_date','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Semantic Brand Name
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="semantic_brand_nameSortASC"
+                                onclick="changeDrugsTableOrder('semantic_brand_name','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="semantic_brand_nameSortDESC"
+                                onclick="changeDrugsTableOrder('semantic_brand_name','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Cost Price
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="cost_priceSortASC"
+                                onclick="changeDrugsTableOrder('cost_price','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="cost_priceSortDESC"
+                                onclick="changeDrugsTableOrder('cost_price','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Selling Price
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="selling_priceSortASC"
+                                onclick="changeDrugsTableOrder('selling_price','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="selling_priceSortDESC"
+                                onclick="changeDrugsTableOrder('selling_price','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="drugTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationDrug"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+
+          <div
+            class="container-fluid panels"
+            id="menu_vendor"
+            style="display: none"
+          >
+            <div class="card">
+              <form id="searchVendorForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="name"
+                          placeholder="Name"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Vendor Code</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="vendor_code"
+                          placeholder="Vendor Code"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Vendor Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("Vendor")'
+                      id="bulkDeleteVendor"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('Vendor')"
+                      style="display: none"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addVendorModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changeVendorsTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover text-nowrap" id="tableVendor">
+                    <thead id="vendorTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectVendor"
+                            onclick="bulkSelect('Vendor')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changeVendorsTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changeVendorsTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Name
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="nameSortASC"
+                                onclick="changeVendorsTableOrder('name','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="nameSortDESC"
+                                onclick="changeVendorsTableOrder('name','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Vendor Code
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="vendor_codeSortASC"
+                                onclick="changeVendorsTableOrder('vendor_code','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="vendor_codeSortDESC"
+                                onclick="changeVendorsTableOrder('vendor_code','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Street Address 1
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="street_address_1SortASC"
+                                onclick="changeVendorsTableOrder('street_address_1','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="street_address_1SortDESC"
+                                onclick="changeVendorsTableOrder('street_address_1','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Street Address 2
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="street_address_2SortASC"
+                                onclick="changeVendorsTableOrder('street_address_2','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="street_address_2SortDESC"
+                                onclick="changeVendorsTableOrder('street_address_2','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            City
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="citySortASC"
+                                onclick="changeVendorsTableOrder('city','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="citySortDESC"
+                                onclick="changeVendorsTableOrder('city','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            State
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="stateSortASC"
+                                onclick="changeVendorsTableOrder('state','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="stateSortDESC"
+                                onclick="changeVendorsTableOrder('state','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Country
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="countrySortASC"
+                                onclick="changeVendorsTableOrder('country','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="countrySortDESC"
+                                onclick="changeVendorsTableOrder('country','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Zip
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="zipSortASC"
+                                onclick="changeVendorsTableOrder('zip','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="zipSortDESC"
+                                onclick="changeVendorsTableOrder('zip','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="vendorTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationVendor"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+
+          <div
+            class="container-fluid panels"
+            id="menu_purchase_drug_item"
+            style="display: none"
+          >
+            <div class="card">
+              <form id="searchPurchase_drug_itemForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Drug Code</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="drug_code"
+                          placeholder="Drug Code"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Purchase Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("Purchase_drug_item")'
+                      id="bulkDeletePurchase_drug_item"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('Purchase_drug_item')"
+                      style="display: none"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addPurchase_drug_itemModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changePurchase_drug_itemsTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table table-hover text-nowrap"
+                    id="tablePurchase_drug_item"
+                  >
+                    <thead id="purchase_drug_itemTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectPurchase_drug_item"
+                            onclick="bulkSelect('Purchase_drug_item')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changePurchase_drug_itemsTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changePurchase_drug_itemsTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Bill Id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="purchase_drug.bill_idSortASC"
+                                onclick="changePurchase_drug_itemsTableOrder('purchase_drug.bill_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="purchase_drug.bill_idSortDESC"
+                                onclick="changePurchase_drug_itemsTableOrder('purchase_drug.bill_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Vendor
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="purchase_drug.vendor.nameSortASC"
+                                onclick="changePurchase_drug_itemsTableOrder('purchase_drug.vendor.name','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="purchase_drug.vendor.nameSortDESC"
+                                onclick="changePurchase_drug_itemsTableOrder('purchase_drug.vendor.name','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Purchase Date
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="purchase_drug.purchase_dateSortASC"
+                                onclick="changePurchase_drug_itemsTableOrder('purchase_drug.purchase_date','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="purchase_drug.purchase_dateSortDESC"
+                                onclick="changePurchase_drug_itemsTableOrder('purchase_drug.purchase_date','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Drug Code
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="drug_codeSortASC"
+                                onclick="changePurchase_drug_itemsTableOrder('drug_code','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="drug_codeSortDESC"
+                                onclick="changePurchase_drug_itemsTableOrder('drug_code','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Quantity
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="quantitySortASC"
+                                onclick="changePurchase_drug_itemsTableOrder('quantity','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="quantitySortDESC"
+                                onclick="changePurchase_drug_itemsTableOrder('quantity','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Returned
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="returnedSortASC"
+                                onclick="changePurchase_drug_itemsTableOrder('returned','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="returnedSortDESC"
+                                onclick="changePurchase_drug_itemsTableOrder('returned','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="purchase_drug_itemTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationPurchase_drug_item"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+
+          <div
+            class="container-fluid panels"
+            id="menu_purchase_drug"
+            style="display: none"
+          >
+            <div class="card">
+              <form id="searchPurchase_drugForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Bill Id</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="bill_id"
+                          placeholder="Bill Id"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Vendor Id</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="vendor_id"
+                          placeholder="Vendor Id"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Purchase Date</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="purchase_date"
+                          placeholder="Purchase Date"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Purchase_drug Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("Purchase_drug")'
+                      id="bulkDeletePurchase_drug"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('Purchase_drug')"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addPurchase_drugModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changePurchase_drugsTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table table-hover text-nowrap"
+                    id="tablePurchase_drug"
+                  >
+                    <thead id="purchase_drugTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectPurchase_drug"
+                            onclick="bulkSelect('Purchase_drug')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changePurchase_drugsTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changePurchase_drugsTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Bill Id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="bill_idSortASC"
+                                onclick="changePurchase_drugsTableOrder('bill_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="bill_idSortDESC"
+                                onclick="changePurchase_drugsTableOrder('bill_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Vendor Id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="vendor_idSortASC"
+                                onclick="changePurchase_drugsTableOrder('vendor_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="vendor_idSortDESC"
+                                onclick="changePurchase_drugsTableOrder('vendor_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Purchase Date
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="purchase_dateSortASC"
+                                onclick="changePurchase_drugsTableOrder('purchase_date','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="purchase_dateSortDESC"
+                                onclick="changePurchase_drugsTableOrder('purchase_date','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="purchase_drugTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationPurchase_drug"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+
+          <div
+            class="container-fluid panels"
+            id="menu_purchase_return_drug"
+            style="display: none"
+          >
+            <div class="card">
+              <form id="searchPurchase_return_drugForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Purchase Drug Item Id</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="purchase_drug_item_id"
+                          placeholder="Purchase Drug Item Id"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Quantity</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="quantity"
+                          placeholder="Quantity"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Return Date</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="return_date"
+                          placeholder="Return Date"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Purchase_return_drug Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("Purchase_return_drug")'
+                      id="bulkDeletePurchase_return_drug"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('Purchase_return_drug')"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addPurchase_return_drugModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changePurchase_return_drugsTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table table-hover text-nowrap"
+                    id="tablePurchase_return_drug"
+                  >
+                    <thead id="purchase_return_drugTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectPurchase_return_drug"
+                            onclick="bulkSelect('Purchase_return_drug')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changePurchase_return_drugsTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changePurchase_return_drugsTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Purchase Drug Item Id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="purchase_drug_item_idSortASC"
+                                onclick="changePurchase_return_drugsTableOrder('purchase_drug_item_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="purchase_drug_item_idSortDESC"
+                                onclick="changePurchase_return_drugsTableOrder('purchase_drug_item_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Quantity
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="quantitySortASC"
+                                onclick="changePurchase_return_drugsTableOrder('quantity','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="quantitySortDESC"
+                                onclick="changePurchase_return_drugsTableOrder('quantity','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Return Date
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="return_dateSortASC"
+                                onclick="changePurchase_return_drugsTableOrder('return_date','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="return_dateSortDESC"
+                                onclick="changePurchase_return_drugsTableOrder('return_date','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="purchase_return_drugTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationPurchase_return_drug"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+
+          <div
+            class="container-fluid panels"
+            id="menu_order"
+            style="display: none"
+          >
+            <div class="card">
+              <form id="searchOrderForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Uuid</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="uuid"
+                          placeholder="Uuid"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Has Prescription</label>
+
+                        <select class="form-control" name="has_prescription">
+                          <option value="">All</option>
+                          <option value="0">No</option>
+                          <option value="1">Yes</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Hospital Id</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="hospital_id"
+                          placeholder="Hospital Id"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Hospital Prescription Id</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="hospital_prescription_id"
+                          placeholder="Hospital Prescription Id"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Hospital Patient Id</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="hospital_patient_id"
+                          placeholder="Hospital Patient Id"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Patient Details Id</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="patient_details_id"
+                          placeholder="Patient Details Id"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Discount</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="discount"
+                          placeholder="Discount"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Status</label>
+
+                        <select class="form-control" name="status">
+                          <option value="">All</option>
+                          <option value="0">Pending</option>
+                          <option value="1">Delivered</option>
+                          <option value="2">Cancelled</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Order Date</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="order_date"
+                          placeholder="Order Date"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Order Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("Order")'
+                      id="bulkDeleteOrder"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('Order')"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addOrderModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changeOrdersTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover text-nowrap" id="tableOrder">
+                    <thead id="orderTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectOrder"
+                            onclick="bulkSelect('Order')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changeOrdersTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changeOrdersTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Uuid
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="uuidSortASC"
+                                onclick="changeOrdersTableOrder('uuid','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="uuidSortDESC"
+                                onclick="changeOrdersTableOrder('uuid','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Has Prescription
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="has_prescriptionSortASC"
+                                onclick="changeOrdersTableOrder('has_prescription','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="has_prescriptionSortDESC"
+                                onclick="changeOrdersTableOrder('has_prescription','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Hospital Id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="hospital_idSortASC"
+                                onclick="changeOrdersTableOrder('hospital_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="hospital_idSortDESC"
+                                onclick="changeOrdersTableOrder('hospital_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Hospital Prescription Id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="hospital_prescription_idSortASC"
+                                onclick="changeOrdersTableOrder('hospital_prescription_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="hospital_prescription_idSortDESC"
+                                onclick="changeOrdersTableOrder('hospital_prescription_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Hospital Patient Id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="hospital_patient_idSortASC"
+                                onclick="changeOrdersTableOrder('hospital_patient_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="hospital_patient_idSortDESC"
+                                onclick="changeOrdersTableOrder('hospital_patient_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Patient Details Id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="patient_details_idSortASC"
+                                onclick="changeOrdersTableOrder('patient_details_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="patient_details_idSortDESC"
+                                onclick="changeOrdersTableOrder('patient_details_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Discount
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="discountSortASC"
+                                onclick="changeOrdersTableOrder('discount','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="discountSortDESC"
+                                onclick="changeOrdersTableOrder('discount','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Status
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="statusSortASC"
+                                onclick="changeOrdersTableOrder('status','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="statusSortDESC"
+                                onclick="changeOrdersTableOrder('status','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Order Date
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="order_dateSortASC"
+                                onclick="changeOrdersTableOrder('order_date','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="order_dateSortDESC"
+                                onclick="changeOrdersTableOrder('order_date','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="orderTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationOrder"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+
+          <div
+            class="container-fluid panels"
+            id="menu_order_item"
+            style="display: none"
+          >
+            <div class="card">
+              <form id="searchOrder_itemForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Order Id</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="order_id"
+                          placeholder="Order Id"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Drug Code</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="drug_code"
+                          placeholder="Drug Code"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Quantity</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="quantity"
+                          placeholder="Quantity"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Returned</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="returned"
+                          placeholder="Returned"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Order_item Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("Order_item")'
+                      id="bulkDeleteOrder_item"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('Order_item')"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addOrder_itemModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changeOrder_itemsTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table table-hover text-nowrap"
+                    id="tableOrder_item"
+                  >
+                    <thead id="order_itemTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectOrder_item"
+                            onclick="bulkSelect('Order_item')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changeOrder_itemsTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changeOrder_itemsTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Order Id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="order_idSortASC"
+                                onclick="changeOrder_itemsTableOrder('order_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="order_idSortDESC"
+                                onclick="changeOrder_itemsTableOrder('order_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Drug Code
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="drug_codeSortASC"
+                                onclick="changeOrder_itemsTableOrder('drug_code','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="drug_codeSortDESC"
+                                onclick="changeOrder_itemsTableOrder('drug_code','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Quantity
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="quantitySortASC"
+                                onclick="changeOrder_itemsTableOrder('quantity','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="quantitySortDESC"
+                                onclick="changeOrder_itemsTableOrder('quantity','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Returned
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="returnedSortASC"
+                                onclick="changeOrder_itemsTableOrder('returned','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="returnedSortDESC"
+                                onclick="changeOrder_itemsTableOrder('returned','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="order_itemTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationOrder_item"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+
+          <div
+            class="container-fluid panels"
+            id="menu_order_return"
+            style="display: none"
+          >
+            <div class="card">
+              <form id="searchOrder_returnForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Order Item Id</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="order_item_id"
+                          placeholder="Order Item Id"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Quantity</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="quantity"
+                          placeholder="Quantity"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Order_return Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("Order_return")'
+                      id="bulkDeleteOrder_return"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('Order_return')"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addOrder_returnModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changeOrder_returnsTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table table-hover text-nowrap"
+                    id="tableOrder_return"
+                  >
+                    <thead id="order_returnTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectOrder_return"
+                            onclick="bulkSelect('Order_return')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changeOrder_returnsTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changeOrder_returnsTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Order Item Id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="order_item_idSortASC"
+                                onclick="changeOrder_returnsTableOrder('order_item_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="order_item_idSortDESC"
+                                onclick="changeOrder_returnsTableOrder('order_item_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Quantity
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="quantitySortASC"
+                                onclick="changeOrder_returnsTableOrder('quantity','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="quantitySortDESC"
+                                onclick="changeOrder_returnsTableOrder('quantity','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="order_returnTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationOrder_return"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+
+          <div
+            class="container-fluid panels"
+            id="menu_patient_details"
+            style="display: none"
+          >
+            <div class="card">
+              <form id="searchPatient_detailsForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="name"
+                          placeholder="Name"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Dob</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="dob"
+                          placeholder="Dob"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="email"
+                          placeholder="Email"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Phone</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="phone"
+                          placeholder="Phone"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Street Address 1</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="street_address_1"
+                          placeholder="Street Address 1"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Street Address 2</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="street_address_2"
+                          placeholder="Street Address 2"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>City</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="city"
+                          placeholder="City"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>State</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="state"
+                          placeholder="State"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Zip</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="zip"
+                          placeholder="Zip"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Country</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="country"
+                          placeholder="Country"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Patient_details Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("Patient_details")'
+                      id="bulkDeletePatient_details"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('Patient_details')"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addPatient_detailsModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changePatient_detailsTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table table-hover text-nowrap"
+                    id="tablePatient_details"
+                  >
+                    <thead id="patient_detailsTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectPatient_details"
+                            onclick="bulkSelect('Patient_details')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changePatient_detailssTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changePatient_detailssTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Name
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="nameSortASC"
+                                onclick="changePatient_detailssTableOrder('name','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="nameSortDESC"
+                                onclick="changePatient_detailssTableOrder('name','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Dob
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="dobSortASC"
+                                onclick="changePatient_detailssTableOrder('dob','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="dobSortDESC"
+                                onclick="changePatient_detailssTableOrder('dob','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Email
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="emailSortASC"
+                                onclick="changePatient_detailssTableOrder('email','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="emailSortDESC"
+                                onclick="changePatient_detailssTableOrder('email','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Phone
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="phoneSortASC"
+                                onclick="changePatient_detailssTableOrder('phone','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="phoneSortDESC"
+                                onclick="changePatient_detailssTableOrder('phone','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Street Address 1
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="street_address_1SortASC"
+                                onclick="changePatient_detailssTableOrder('street_address_1','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="street_address_1SortDESC"
+                                onclick="changePatient_detailssTableOrder('street_address_1','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Street Address 2
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="street_address_2SortASC"
+                                onclick="changePatient_detailssTableOrder('street_address_2','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="street_address_2SortDESC"
+                                onclick="changePatient_detailssTableOrder('street_address_2','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            City
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="citySortASC"
+                                onclick="changePatient_detailssTableOrder('city','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="citySortDESC"
+                                onclick="changePatient_detailssTableOrder('city','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            State
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="stateSortASC"
+                                onclick="changePatient_detailssTableOrder('state','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="stateSortDESC"
+                                onclick="changePatient_detailssTableOrder('state','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Zip
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="zipSortASC"
+                                onclick="changePatient_detailssTableOrder('zip','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="zipSortDESC"
+                                onclick="changePatient_detailssTableOrder('zip','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Country
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="countrySortASC"
+                                onclick="changePatient_detailssTableOrder('country','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="countrySortDESC"
+                                onclick="changePatient_detailssTableOrder('country','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="patient_detailsTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationPatient_details"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+
+          <div
+            class="container-fluid panels"
+            id="change_password"
+            style="display: none"
+          >
+            <div class="card p-2">
+              <form action="#" class="col-sm-12 col-md-6" id="passwordForm">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label"
+                    >New Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="newPassword1"
+                    placeholder=""
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label"
+                    >Confirm Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="newPassword2"
+                    placeholder=""
+                  />
+                </div>
+                <button class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+        <div class="p-3">
+          <h5>Title</h5>
+          <p>Sidebar content</p>
+        </div>
+      </aside>
+      <!-- /.control-sidebar -->
+
+      <!-- Main Footer -->
+      <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline"></div>
+        <!-- Default to the left -->
+        <!-- <small
+          >Copyright &copy; 2021
+          <a href="https://umbrellasolution.in">jajirx</a>. All
+          rights reserved.</small
+        > -->
+      </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!--Modals-->
+
+    <!-- ADD MODAL Users -->
+    <div
+      class="modal fade"
+      id="addUserModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addUserForm">
+              <label>First Name</label>
+              <input
+                type="text"
+                id="addUserFirstNameInput"
+                name="first_name"
+                class="form-control mb-2"
+                placeholder="First Name"
+              />
+              <label>Last Name</label>
+              <input
+                type="text"
+                id="addUserLastNameInput"
+                name="last_name"
+                class="form-control mb-2"
+                placeholder="Last Name"
+              />
+              <label>Phone</label>
+              <input
+                type="text"
+                id="addUserPhoneInput"
+                name="phone"
+                class="form-control mb-2"
+                placeholder="Phone"
+              />
+              <label>Email</label>
+              <input
+                type="email"
+                id="addUserEmailInput"
+                name="email"
+                class="form-control mb-2"
+                placeholder="Email"
+              />
+              <label>Password</label>
+              <input
+                type="password"
+                id="addUserPasswordInput"
+                name="password"
+                class="form-control mb-2"
+                placeholder="Password"
+              />
+              <label>Role Id</label
+              ><select class="form-control mb-2" id="addUserRoleIdInput">
+                <option value="0">Admin</option>
+                <option value="1">Pharmacies</option></select
+              ><button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD MODAL Drug -->
+    <div
+      class="modal fade"
+      id="importDrugModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Import Drug</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="importDrug">
+              <label>Upload Sheet</label>
+              <div><input type="file" /></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="addDrugModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Drug</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div style="max-height: 70vh; overflow: auto">
+              <form action="#" id="addDrugForm">
+                <label>Medication</label>
+                <input
+                  type="text"
+                  id="addDrugMedicationInput"
+                  name="medication"
+                  class="form-control mb-2"
+                  placeholder="Medication"
+                />
+                <label>Ingredient</label>
+                <input
+                  type="text"
+                  id="addDrugIngredientInput"
+                  name="ingredient"
+                  class="form-control mb-2"
+                  placeholder="Ingredient"
+                />
+                <label>Drug Code</label>
+                <input
+                  type="text"
+                  id="addDrugDrugCodeInput"
+                  name="drug_code"
+                  class="form-control mb-2"
+                  placeholder="Drug Code"
+                />
+                <label>Drug Name</label>
+                <input
+                  type="text"
+                  id="addDrugDrugNameInput"
+                  name="drug_name"
+                  class="form-control mb-2"
+                  placeholder="Drug Name"
+                />
+                <label>Available Quantity</label>
+                <input
+                  type="number"
+                  id="addDrugAvailableQuantityInput"
+                  name="available_quantity"
+                  class="form-control mb-2"
+                  placeholder="AvailableQuantity"
+                />
+                <label>Batch No</label>
+                <input
+                  type="text"
+                  id="addDrugBatchNoInput"
+                  name="batch_no"
+                  class="form-control mb-2"
+                  placeholder="Batch No"
+                />
+                <label>Reorder Quantity</label>
+                <input
+                  type="number"
+                  id="addDrugReorderQuantityInput"
+                  name="reorder_quantity"
+                  class="form-control mb-2"
+                  placeholder="ReorderQuantity"
+                />
+                <label>Expiration Date</label>
+                <input
+                  type="date"
+                  id="addDrugExpirationDateInput"
+                  name="expiration_date"
+                  class="form-control mb-2"
+                  placeholder="Expiration Date"
+                />
+                <label>Semantic Brand Name</label>
+                <input
+                  type="text"
+                  id="addDrugSemanticBrandNameInput"
+                  name="semantic_brand_name"
+                  class="form-control mb-2"
+                  placeholder="Semantic Brand Name"
+                />
+                <label>Cost Price</label>
+                <input
+                  type="text"
+                  id="addDrugCostPriceInput"
+                  name="cost_price"
+                  class="form-control mb-2"
+                  placeholder="Cost Price"
+                />
+                <label>Selling Price</label>
+                <input
+                  type="text"
+                  id="addDrugSellingPriceInput"
+                  name="selling_price"
+                  class="form-control mb-2"
+                  placeholder="Selling Price"
+                />
+                <button type="submit" class="btn btn-primary btn-sm mt-2">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD MODAL Vendor -->
+    <div
+      class="modal fade"
+      id="addVendorModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Vendor</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addVendorForm">
+              <label>Name</label>
+              <input
+                type="text"
+                id="addVendorNameInput"
+                name="name"
+                class="form-control mb-2"
+                placeholder="Name"
+              />
+              <label>Vendor Code</label>
+              <input
+                type="text"
+                id="addVendorVendorCodeInput"
+                name="vendor_code"
+                class="form-control mb-2"
+                placeholder="Vendor Code"
+              />
+              <label>Street Address 1</label>
+              <input
+                type="text"
+                id="addVendorStreetAddress1Input"
+                name="street_address_1"
+                class="form-control mb-2"
+                placeholder="Street Address 1"
+              />
+              <label>Street Address 2</label>
+              <input
+                type="text"
+                id="addVendorStreetAddress2Input"
+                name="street_address_2"
+                class="form-control mb-2"
+                placeholder="Street Address 2"
+              />
+              <label>City</label>
+              <input
+                type="text"
+                id="addVendorCityInput"
+                name="city"
+                class="form-control mb-2"
+                placeholder="City"
+              />
+              <label>State</label>
+              <input
+                type="text"
+                id="addVendorStateInput"
+                name="state"
+                class="form-control mb-2"
+                placeholder="State"
+              />
+              <label>Country</label>
+              <input
+                type="text"
+                id="addVendorCountryInput"
+                name="country"
+                class="form-control mb-2"
+                placeholder="Country"
+              />
+              <label>Zip</label>
+              <input
+                type="text"
+                id="addVendorZipInput"
+                name="zip"
+                class="form-control mb-2"
+                placeholder="Zip"
+              />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD MODAL Purchase -->
+    <div
+      class="modal fade"
+      id="addPurchase_drug_itemModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Purchase</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addPurchase_drug_itemForm">
+              <div class="row col-lg-12 col-md-12">
+                <div class="col-md-3">
+                  <label>Bill Id</label>
+                  <input
+                    type="text"
+                    id="addPurchaseDrugItemBillIdInput"
+                    name="bill_id"
+                    class="form-control mb-2"
+                    placeholder="Bill Id"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label>Vendor</label>
+                  <select
+                    id="addPurchaseDrugItemVendorIdInput"
+                    name="vendor_id"
+                    class="form-control mb-2"
+                    placeholder="Vendor Id"
+                    required
+                  >
+                    <option value="">Select</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label>Purchase Date</label>
+                  <input
+                    type="date"
+                    id="addPurchaseDrugItemPurchaseDateInput"
+                    name="purchase_date"
+                    class="form-control mb-2"
+                    placeholder="Purchase Date"
+                  />
+                </div>
+              </div>
+              <div
+                id="purchaseDrugItemList"
+                class="col-lg-12 col-md-12 col-sm-12 mb-5"
+              ></div>
+              <span
+                onclick="addPurchaseDrugListItem()"
+                class="btn btn-secondary btn-sm mt-2"
+              >
+                Add Item
+              </span>
+
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD MODAL Purchase_drug -->
+    <div
+      class="modal fade"
+      id="addPurchase_drugModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Add Purchase_drug
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addPurchase_drugForm">
+              <label>Bill Id</label>
+              <input
+                type="text"
+                id="addPurchaseDrugBillIdInput"
+                name="bill_id"
+                class="form-control mb-2"
+                placeholder="Bill Id"
+              />
+              <label>Vendor Id</label>
+              <input
+                type="text"
+                id="addPurchaseDrugVendorIdInput"
+                name="vendor_id"
+                class="form-control mb-2"
+                placeholder="Vendor Id"
+              />
+              <label>Purchase Date</label>
+              <input
+                type="date"
+                id="addPurchaseDrugPurchaseDateInput"
+                name="purchase_date"
+                class="form-control mb-2"
+                placeholder="Purchase Date"
+              />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD MODAL Purchase_return_drug -->
+    <div
+      class="modal fade"
+      id="addPurchase_return_drugModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Add Purchase_return_drug
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addPurchase_return_drugForm">
+              <label>Purchase Drug Item Id</label>
+              <input
+                type="text"
+                id="addPurchaseReturnDrugPurchaseDrugItemIdInput"
+                name="purchase_drug_item_id"
+                class="form-control mb-2"
+                placeholder="Purchase Drug Item Id"
+              />
+              <label>Quantity</label>
+              <input
+                type="number"
+                id="addPurchaseReturnDrugQuantityInput"
+                name="quantity"
+                class="form-control mb-2"
+                placeholder="Quantity"
+              />
+              <label>Return Date</label>
+              <input
+                type="date"
+                id="addPurchaseReturnDrugReturnDateInput"
+                name="return_date"
+                class="form-control mb-2"
+                placeholder="Return Date"
+              />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD MODAL Order -->
+    <div
+      class="modal fade"
+      id="addOrderModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Order</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addOrderForm">
+              <label>Uuid</label>
+              <input
+                type="text"
+                id="addOrderUuidInput"
+                name="uuid"
+                class="form-control mb-2"
+                placeholder="Uuid"
+              />
+              <label>Has Prescription</label
+              ><select
+                class="form-control mb-2"
+                id="addOrderHasPrescriptionInput"
+              >
+                <option value="0">No</option>
+                <option value="1">Yes</option></select
+              ><label>Hospital Id</label>
+              <input
+                type="number"
+                id="addOrderHospitalIdInput"
+                name="hospital_id"
+                class="form-control mb-2"
+                placeholder="HospitalId"
+              />
+              <label>Hospital Prescription Id</label>
+              <input
+                type="number"
+                id="addOrderHospitalPrescriptionIdInput"
+                name="hospital_prescription_id"
+                class="form-control mb-2"
+                placeholder="HospitalPrescriptionId"
+              />
+              <label>Hospital Patient Id</label>
+              <input
+                type="number"
+                id="addOrderHospitalPatientIdInput"
+                name="hospital_patient_id"
+                class="form-control mb-2"
+                placeholder="HospitalPatientId"
+              />
+              <label>Patient Details Id</label>
+              <input
+                type="text"
+                id="addOrderPatientDetailsIdInput"
+                name="patient_details_id"
+                class="form-control mb-2"
+                placeholder="Patient Details Id"
+              />
+              <label>Discount</label>
+              <input
+                type="number"
+                id="addOrderDiscountInput"
+                name="discount"
+                class="form-control mb-2"
+                placeholder="Discount"
+              />
+              <label>Status</label
+              ><select class="form-control mb-2" id="addOrderStatusInput">
+                <option value="0">Pending</option>
+                <option value="1">Delivered</option>
+                <option value="2">Cancelled</option></select
+              ><label>Order Date</label>
+              <input
+                type="date"
+                id="addOrderOrderDateInput"
+                name="order_date"
+                class="form-control mb-2"
+                placeholder="Order Date"
+              />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD MODAL Order_item -->
+    <div
+      class="modal fade"
+      id="addOrder_itemModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Order_item</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addOrder_itemForm">
+              <label>Order Id</label>
+              <input
+                type="text"
+                id="addOrderItemOrderIdInput"
+                name="order_id"
+                class="form-control mb-2"
+                placeholder="Order Id"
+              />
+              <label>Drug Code</label>
+              <input
+                type="text"
+                id="addOrderItemDrugCodeInput"
+                name="drug_code"
+                class="form-control mb-2"
+                placeholder="Drug Code"
+              />
+              <label>Quantity</label>
+              <input
+                type="number"
+                id="addOrderItemQuantityInput"
+                name="quantity"
+                class="form-control mb-2"
+                placeholder="Quantity"
+              />
+              <label>Returned</label>
+              <input
+                type="number"
+                id="addOrderItemReturnedInput"
+                name="returned"
+                class="form-control mb-2"
+                placeholder="Returned"
+              />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD MODAL Order_return -->
+    <div
+      class="modal fade"
+      id="addOrder_returnModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Order_return</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addOrder_returnForm">
+              <label>Order Item Id</label>
+              <input
+                type="text"
+                id="addOrderReturnOrderItemIdInput"
+                name="order_item_id"
+                class="form-control mb-2"
+                placeholder="Order Item Id"
+              />
+              <label>Quantity</label>
+              <input
+                type="number"
+                id="addOrderReturnQuantityInput"
+                name="quantity"
+                class="form-control mb-2"
+                placeholder="Quantity"
+              />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD MODAL Patient_details -->
+    <div
+      class="modal fade"
+      id="addPatient_detailsModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Add Patient_details
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addPatient_detailsForm">
+              <label>Name</label>
+              <input
+                type="text"
+                id="addPatientDetailsNameInput"
+                name="name"
+                class="form-control mb-2"
+                placeholder="Name"
+              />
+              <label>Dob</label>
+              <input
+                type="date"
+                id="addPatientDetailsDobInput"
+                name="dob"
+                class="form-control mb-2"
+                placeholder="Dob"
+              />
+              <label>Email</label>
+              <input
+                type="text"
+                id="addPatientDetailsEmailInput"
+                name="email"
+                class="form-control mb-2"
+                placeholder="Email"
+              />
+              <label>Phone</label>
+              <input
+                type="text"
+                id="addPatientDetailsPhoneInput"
+                name="phone"
+                class="form-control mb-2"
+                placeholder="Phone"
+              />
+              <label>Street Address 1</label>
+              <input
+                type="text"
+                id="addPatientDetailsStreetAddress1Input"
+                name="street_address_1"
+                class="form-control mb-2"
+                placeholder="Street Address 1"
+              />
+              <label>Street Address 2</label>
+              <input
+                type="text"
+                id="addPatientDetailsStreetAddress2Input"
+                name="street_address_2"
+                class="form-control mb-2"
+                placeholder="Street Address 2"
+              />
+              <label>City</label>
+              <input
+                type="text"
+                id="addPatientDetailsCityInput"
+                name="city"
+                class="form-control mb-2"
+                placeholder="City"
+              />
+              <label>State</label>
+              <input
+                type="text"
+                id="addPatientDetailsStateInput"
+                name="state"
+                class="form-control mb-2"
+                placeholder="State"
+              />
+              <label>Zip</label>
+              <input
+                type="text"
+                id="addPatientDetailsZipInput"
+                name="zip"
+                class="form-control mb-2"
+                placeholder="Zip"
+              />
+              <label>Country</label>
+              <input
+                type="text"
+                id="addPatientDetailsCountryInput"
+                name="country"
+                class="form-control mb-2"
+                placeholder="Country"
+              />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Users -->
+    <div
+      class="modal fade"
+      id="editUserModal"
+      tabindex="-1"
+      aria-labelledby="UserModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="UserModalLabel">Edit User</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editUserForm">
+              <label>First Name</label>
+              <input
+                type="text"
+                id="editUserFirstNameInput"
+                name="first_name"
+                class="form-control mb-2"
+                placeholder="First_name"
+              />
+              <label>Last Name</label>
+              <input
+                type="text"
+                id="editUserLastNameInput"
+                name="last_name"
+                class="form-control mb-2"
+                placeholder="Last_name"
+              />
+              <label>Phone</label>
+              <input
+                type="text"
+                id="editUserPhoneInput"
+                name="phone"
+                class="form-control mb-2"
+                placeholder="Phone"
+              />
+              <label>Email</label>
+              <input
+                type="email"
+                id="editUserEmailInput"
+                name="email"
+                class="form-control mb-2"
+                placeholder="Email"
+              />
+              <label>Password</label>
+              <input
+                type="password"
+                id="editUserPasswordInput"
+                name="password"
+                class="form-control mb-2"
+                placeholder="Password"
+              />
+              <label>Role Id</label>
+              <input
+                type="number"
+                id="editUserRoleIdInput"
+                name="role_id"
+                class="form-control mb-2"
+                placeholder="Role Id"
+              />
+              <input type="hidden" id="editUserUserId" />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Drug -->
+    <div
+      class="modal fade"
+      id="editDrugModal"
+      tabindex="-1"
+      aria-labelledby="DrugModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="DrugModalLabel">Edit Drug</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editDrugForm">
+              <label>Medication</label>
+              <input
+                type="text"
+                id="editDrugMedicationInput"
+                name="medication"
+                class="form-control mb-2"
+                placeholder="Medication"
+              />
+              <label>Ingredient</label>
+              <input
+                type="text"
+                id="editDrugIngredientInput"
+                name="ingredient"
+                class="form-control mb-2"
+                placeholder="Ingredient"
+              />
+              <label>Drug Code</label>
+              <input
+                type="text"
+                id="editDrugDrugCodeInput"
+                name="drug_code"
+                class="form-control mb-2"
+                placeholder="Drug_code"
+              />
+              <label>Drug Name</label>
+              <input
+                type="text"
+                id="editDrugDrugNameInput"
+                name="drug_name"
+                class="form-control mb-2"
+                placeholder="Drug_name"
+              />
+              <label>Available Quantity</label>
+              <input
+                type="text"
+                id="editDrugAvailableQuantityInput"
+                name="available_quantity"
+                class="form-control mb-2"
+                placeholder="Available_quantity"
+              />
+              <label>Batch No</label>
+              <input
+                type="text"
+                id="editDrugBatchNoInput"
+                name="batch_no"
+                class="form-control mb-2"
+                placeholder="Batch_no"
+              />
+              <label>Reorder Quantity</label>
+              <input
+                type="text"
+                id="editDrugReorderQuantityInput"
+                name="reorder_quantity"
+                class="form-control mb-2"
+                placeholder="Reorder_quantity"
+              />
+              <label>Expiration Date</label>
+              <input
+                type="text"
+                id="editDrugExpirationDateInput"
+                name="expiration_date"
+                class="form-control mb-2"
+                placeholder="Expiration_date"
+              />
+              <label>Semantic Brand Name</label>
+              <input
+                type="text"
+                id="editDrugSemanticBrandNameInput"
+                name="semantic_brand_name"
+                class="form-control mb-2"
+                placeholder="Semantic_brand_name"
+              />
+              <label>Cost Price</label>
+              <input
+                type="text"
+                id="editDrugCostPriceInput"
+                name="cost_price"
+                class="form-control mb-2"
+                placeholder="Cost_price"
+              />
+              <label>Selling Price</label>
+              <input
+                type="text"
+                id="editDrugSellingPriceInput"
+                name="selling_price"
+                class="form-control mb-2"
+                placeholder="Selling_price"
+              />
+              <input type="hidden" id="editDrugDrugId" />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Vendor -->
+    <div
+      class="modal fade"
+      id="editVendorModal"
+      tabindex="-1"
+      aria-labelledby="VendorModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="VendorModalLabel">Edit Vendor</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editVendorForm">
+              <label>Name</label>
+              <input
+                type="text"
+                id="editVendorNameInput"
+                name="name"
+                class="form-control mb-2"
+                placeholder="Name"
+              />
+              <label>Vendor Code</label>
+              <input
+                type="text"
+                id="editVendorVendorCodeInput"
+                name="vendor_code"
+                class="form-control mb-2"
+                placeholder="Vendor_code"
+              />
+              <label>Street Address 1</label>
+              <input
+                type="text"
+                id="editVendorStreetAddress1Input"
+                name="street_address_1"
+                class="form-control mb-2"
+                placeholder="Street_address_1"
+              />
+              <label>Street Address 2</label>
+              <input
+                type="text"
+                id="editVendorStreetAddress2Input"
+                name="street_address_2"
+                class="form-control mb-2"
+                placeholder="Street_address_2"
+              />
+              <label>City</label>
+              <input
+                type="text"
+                id="editVendorCityInput"
+                name="city"
+                class="form-control mb-2"
+                placeholder="City"
+              />
+              <label>State</label>
+              <input
+                type="text"
+                id="editVendorStateInput"
+                name="state"
+                class="form-control mb-2"
+                placeholder="State"
+              />
+              <label>Country</label>
+              <input
+                type="text"
+                id="editVendorCountryInput"
+                name="country"
+                class="form-control mb-2"
+                placeholder="Country"
+              />
+              <label>Zip</label>
+              <input
+                type="text"
+                id="editVendorZipInput"
+                name="zip"
+                class="form-control mb-2"
+                placeholder="Zip"
+              />
+              <input type="hidden" id="editVendorVendorId" />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Purchase -->
+    <div
+      class="modal fade"
+      id="editPurchase_drug_itemModal"
+      tabindex="-1"
+      aria-labelledby="Purchase_drug_itemModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Purchase_drug_itemModalLabel">
+              Edit Purchase_drug_item
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editPurchase_drug_itemForm">
+              <label>Purchase Drug Id</label>
+              <input
+                type="text"
+                id="editPurchase_drug_itemPurchaseDrugIdInput"
+                name="purchase_drug_id"
+                class="form-control mb-2"
+                placeholder="Purchase_drug_id"
+              />
+              <label>Drug Code</label>
+              <input
+                type="text"
+                id="editPurchase_drug_itemDrugCodeInput"
+                name="drug_code"
+                class="form-control mb-2"
+                placeholder="Drug_code"
+              />
+              <label>Quantity</label>
+              <input
+                type="text"
+                id="editPurchase_drug_itemQuantityInput"
+                name="quantity"
+                class="form-control mb-2"
+                placeholder="Quantity"
+              />
+              <label>Returned</label>
+              <input
+                type="text"
+                id="editPurchase_drug_itemReturnedInput"
+                name="returned"
+                class="form-control mb-2"
+                placeholder="Returned"
+              />
+              <input
+                type="hidden"
+                id="editPurchase_drug_itemPurchase_drug_itemId"
+              />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Purchase_drug -->
+    <div
+      class="modal fade"
+      id="editPurchase_drugModal"
+      tabindex="-1"
+      aria-labelledby="Purchase_drugModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Purchase_drugModalLabel">
+              Edit Purchase_drug
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editPurchase_drugForm">
+              <label>Bill Id</label>
+              <input
+                type="text"
+                id="editPurchase_drugBillIdInput"
+                name="bill_id"
+                class="form-control mb-2"
+                placeholder="Bill_id"
+              />
+              <label>Vendor Id</label>
+              <input
+                type="text"
+                id="editPurchase_drugVendorIdInput"
+                name="vendor_id"
+                class="form-control mb-2"
+                placeholder="Vendor_id"
+              />
+              <label>Purchase Date</label>
+              <input
+                type="text"
+                id="editPurchase_drugPurchaseDateInput"
+                name="purchase_date"
+                class="form-control mb-2"
+                placeholder="Purchase_date"
+              />
+              <input type="hidden" id="editPurchase_drugPurchase_drugId" />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Purchase_return_drug -->
+    <div
+      class="modal fade"
+      id="editPurchase_return_drugModal"
+      tabindex="-1"
+      aria-labelledby="Purchase_return_drugModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Purchase_return_drugModalLabel">
+              Edit Purchase_return_drug
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editPurchase_return_drugForm">
+              <label>Purchase Drug Item Id</label>
+              <input
+                type="text"
+                id="editPurchase_return_drugPurchaseDrugItemIdInput"
+                name="purchase_drug_item_id"
+                class="form-control mb-2"
+                placeholder="Purchase_drug_item_id"
+              />
+              <label>Quantity</label>
+              <input
+                type="text"
+                id="editPurchase_return_drugQuantityInput"
+                name="quantity"
+                class="form-control mb-2"
+                placeholder="Quantity"
+              />
+              <label>Return Date</label>
+              <input
+                type="text"
+                id="editPurchase_return_drugReturnDateInput"
+                name="return_date"
+                class="form-control mb-2"
+                placeholder="Return_date"
+              />
+              <input
+                type="hidden"
+                id="editPurchase_return_drugPurchase_return_drugId"
+              />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Order -->
+    <div
+      class="modal fade"
+      id="editOrderModal"
+      tabindex="-1"
+      aria-labelledby="OrderModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="OrderModalLabel">Edit Order</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editOrderForm">
+              <label>Uuid</label>
+              <input
+                type="text"
+                id="editOrderUuidInput"
+                name="uuid"
+                class="form-control mb-2"
+                placeholder="Uuid"
+              />
+              <label>Has Prescription</label
+              ><select
+                class="form-control mb-2"
+                id="editOrderHasPrescriptionInput"
+              >
+                <option value="0">No</option>
+                <option value="1">Yes</option></select
+              ><label>Hospital Id</label>
+              <input
+                type="text"
+                id="editOrderHospitalIdInput"
+                name="hospital_id"
+                class="form-control mb-2"
+                placeholder="Hospital_id"
+              />
+              <label>Hospital Prescription Id</label>
+              <input
+                type="text"
+                id="editOrderHospitalPrescriptionIdInput"
+                name="hospital_prescription_id"
+                class="form-control mb-2"
+                placeholder="Hospital_prescription_id"
+              />
+              <label>Hospital Patient Id</label>
+              <input
+                type="text"
+                id="editOrderHospitalPatientIdInput"
+                name="hospital_patient_id"
+                class="form-control mb-2"
+                placeholder="Hospital_patient_id"
+              />
+              <label>Patient Details Id</label>
+              <input
+                type="text"
+                id="editOrderPatientDetailsIdInput"
+                name="patient_details_id"
+                class="form-control mb-2"
+                placeholder="Patient_details_id"
+              />
+              <label>Discount</label>
+              <input
+                type="text"
+                id="editOrderDiscountInput"
+                name="discount"
+                class="form-control mb-2"
+                placeholder="Discount"
+              />
+              <label>Status</label
+              ><select class="form-control mb-2" id="editOrderStatusInput">
+                <option value="0">Pending</option>
+                <option value="1">Delivered</option>
+                <option value="2">Cancelled</option></select
+              ><label>Order Date</label>
+              <input
+                type="text"
+                id="editOrderOrderDateInput"
+                name="order_date"
+                class="form-control mb-2"
+                placeholder="Order_date"
+              />
+              <input type="hidden" id="editOrderOrderId" />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Order_item -->
+    <div
+      class="modal fade"
+      id="editOrder_itemModal"
+      tabindex="-1"
+      aria-labelledby="Order_itemModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Order_itemModalLabel">
+              Edit Order_item
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editOrder_itemForm">
+              <label>Order Id</label>
+              <input
+                type="text"
+                id="editOrder_itemOrderIdInput"
+                name="order_id"
+                class="form-control mb-2"
+                placeholder="Order_id"
+              />
+              <label>Drug Code</label>
+              <input
+                type="text"
+                id="editOrder_itemDrugCodeInput"
+                name="drug_code"
+                class="form-control mb-2"
+                placeholder="Drug_code"
+              />
+              <label>Quantity</label>
+              <input
+                type="text"
+                id="editOrder_itemQuantityInput"
+                name="quantity"
+                class="form-control mb-2"
+                placeholder="Quantity"
+              />
+              <label>Returned</label>
+              <input
+                type="text"
+                id="editOrder_itemReturnedInput"
+                name="returned"
+                class="form-control mb-2"
+                placeholder="Returned"
+              />
+              <input type="hidden" id="editOrder_itemOrder_itemId" />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Order_return -->
+    <div
+      class="modal fade"
+      id="editOrder_returnModal"
+      tabindex="-1"
+      aria-labelledby="Order_returnModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Order_returnModalLabel">
+              Edit Order_return
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editOrder_returnForm">
+              <label>Order Item Id</label>
+              <input
+                type="text"
+                id="editOrder_returnOrderItemIdInput"
+                name="order_item_id"
+                class="form-control mb-2"
+                placeholder="Order_item_id"
+              />
+              <label>Quantity</label>
+              <input
+                type="text"
+                id="editOrder_returnQuantityInput"
+                name="quantity"
+                class="form-control mb-2"
+                placeholder="Quantity"
+              />
+              <input type="hidden" id="editOrder_returnOrder_returnId" />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Patient_details -->
+    <div
+      class="modal fade"
+      id="editPatient_detailsModal"
+      tabindex="-1"
+      aria-labelledby="Patient_detailsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Patient_detailsModalLabel">
+              Edit Patient_details
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editPatient_detailsForm">
+              <label>Name</label>
+              <input
+                type="text"
+                id="editPatient_detailsNameInput"
+                name="name"
+                class="form-control mb-2"
+                placeholder="Name"
+              />
+              <label>Dob</label>
+              <input
+                type="text"
+                id="editPatient_detailsDobInput"
+                name="dob"
+                class="form-control mb-2"
+                placeholder="Dob"
+              />
+              <label>Email</label>
+              <input
+                type="text"
+                id="editPatient_detailsEmailInput"
+                name="email"
+                class="form-control mb-2"
+                placeholder="Email"
+              />
+              <label>Phone</label>
+              <input
+                type="text"
+                id="editPatient_detailsPhoneInput"
+                name="phone"
+                class="form-control mb-2"
+                placeholder="Phone"
+              />
+              <label>Street Address 1</label>
+              <input
+                type="text"
+                id="editPatient_detailsStreetAddress1Input"
+                name="street_address_1"
+                class="form-control mb-2"
+                placeholder="Street_address_1"
+              />
+              <label>Street Address 2</label>
+              <input
+                type="text"
+                id="editPatient_detailsStreetAddress2Input"
+                name="street_address_2"
+                class="form-control mb-2"
+                placeholder="Street_address_2"
+              />
+              <label>City</label>
+              <input
+                type="text"
+                id="editPatient_detailsCityInput"
+                name="city"
+                class="form-control mb-2"
+                placeholder="City"
+              />
+              <label>State</label>
+              <input
+                type="text"
+                id="editPatient_detailsStateInput"
+                name="state"
+                class="form-control mb-2"
+                placeholder="State"
+              />
+              <label>Zip</label>
+              <input
+                type="text"
+                id="editPatient_detailsZipInput"
+                name="zip"
+                class="form-control mb-2"
+                placeholder="Zip"
+              />
+              <label>Country</label>
+              <input
+                type="text"
+                id="editPatient_detailsCountryInput"
+                name="country"
+                class="form-control mb-2"
+                placeholder="Country"
+              />
+              <input type="hidden" id="editPatient_detailsPatient_detailsId" />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="./../js/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="./../js/bootstrap.bundle.min.js"></script>
+    <!-- Sweet Alert 4 -->
+    <script src="./../js/sweetalert.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="./../js/adminlte.js"></script>
+    <script src="./../js/dashboard.js"></script>
+    <script src="./../js/common_script.js"></script>
+    <script src="./js/script.js"></script>
+
+    <script src="./js/user.js"></script>
+
+    <script src="./js/drug.js"></script>
+
+    <script src="./js/vendor.js"></script>
+
+    <script src="./js/purchase_drug_item.js"></script>
+
+    <script src="./js/purchase_drug.js"></script>
+
+    <script src="./js/purchase_return_drug.js"></script>
+
+    <script src="./js/order.js"></script>
+
+    <script src="./js/order_item.js"></script>
+
+    <script src="./js/order_return.js"></script>
+
+    <script src="./js/patient_details.js"></script>
+    <script>
+      // /* globals Chart:false, feather:false */
+
+      $(".nav-link").on("click", (ev) => {
+        console.log("nav-link cliked ", ev.currentTarget.hash);
+        ev.preventDefault();
+        if (ev.currentTarget.hash && $(ev.currentTarget.hash)) {
+          $(".nav-link").removeClass("active");
+          ev.currentTarget.classList.add("active");
+
+          $(".panels").hide();
+          $(ev.currentTarget.hash).show();
+        }
+      });
+    </script>
+  </body>
+</html>

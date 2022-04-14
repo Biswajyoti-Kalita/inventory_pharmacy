@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jajirx" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pharmacies hospital_order</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="./../css/adminlte.css" />
+    <link rel="stylesheet" href="./../css/style.css" />
+    <script src="./../js/cookie.umd.min.js"></script>
+  </head>
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"
+              ><i class="fas fa-bars"></i
+            ></a>
+          </li>
+        </ul>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Navbar Search -->
+          <li class="nav-item">
+            <span class="nav-link" onclick="logout()" role="button">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </span>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/" class="brand-link text-center">
+          <span class="brand-text font-weight-light">Jajirx</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img
+                src="./../image/default-pic.webp"
+                class="img-circle elevation-2"
+                id="userImage"
+                alt="User Image"
+              />
+            </div>
+            <div class="info">
+              <a href="dashboard.html" class="d-block">Pharmacies</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul
+              class="nav nav-pills nav-sidebar flex-column"
+              data-widget="treeview"
+              role="menu"
+              data-accordion="false"
+            >
+              <!-- Add icons to the links using the .nav-icon class
+                       with font-awesome or any other icon font library -->
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h3 class="m-0" id="currentMenuTitle"></h3>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid panels" id="menu_order" style="">
+            <div class="card">
+              <form id="searchOrderForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Hospital Id</label>
+                        <select
+                          type="text"
+                          class="form-control"
+                          name="hospital_id"
+                          id="filter_hospital_id"
+                          placeholder="Hospital Id"
+                        ></select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Hospital Department</label>
+                        <select
+                          class="form-control"
+                          name="hospital_department_id"
+                          id="filter_hospital_department"
+                        ></select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Status</label>
+
+                        <select class="form-control" name="status">
+                          <option value="">All</option>
+                          <option value="3">Requested</option>
+                          <option value="4">Accepted</option>
+                          <option value="2">Cancelled</option>
+                          <option value="5">Preparing</option>
+                          <option value="6">Shipped</option>
+                          <option value="7">Fulfilled</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Order Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("Order")'
+                      id="bulkDeleteOrder"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary hide"
+                      onclick="exportTable('Order')"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addOrderModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changeOrdersTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover text-nowrap" id="tableOrder">
+                    <thead id="orderTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectOrder"
+                            onclick="bulkSelect('Order')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changeOrdersTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changeOrdersTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Hospital
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="hospital_idSortASC"
+                                onclick="changeOrdersTableOrder('hospital_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="hospital_idSortDESC"
+                                onclick="changeOrdersTableOrder('hospital_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">Hospital Department</div>
+                        </th>
+                        <th>
+                          <div style="display: flex">Requested By</div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Discount
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="discountSortASC"
+                                onclick="changeOrdersTableOrder('discount','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="discountSortDESC"
+                                onclick="changeOrdersTableOrder('discount','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Price
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="amountSortASC"
+                                onclick="changeOrdersTableOrder('amount','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="amountSortDESC"
+                                onclick="changeOrdersTableOrder('amount','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Total
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="amountSortASC"
+                                onclick="changeOrdersTableOrder('amount','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="amountSortDESC"
+                                onclick="changeOrdersTableOrder('amount','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Payment Type
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="payment_typeSortASC"
+                                onclick="changeOrdersTableOrder('payment_type','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="payment_typeSortDESC"
+                                onclick="changeOrdersTableOrder('payment_type','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">Payment Information</div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Additional Information
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="additional_informationSortASC"
+                                onclick="changeOrdersTableOrder('additional_information','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="additional_informationSortDESC"
+                                onclick="changeOrdersTableOrder('additional_information','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Status
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="statusSortASC"
+                                onclick="changeOrdersTableOrder('status','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="statusSortDESC"
+                                onclick="changeOrdersTableOrder('status','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="orderTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationOrder"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+        <div class="p-3">
+          <h5>Title</h5>
+          <p>Sidebar content</p>
+        </div>
+      </aside>
+      <!-- /.control-sidebar -->
+
+      <!-- Main Footer -->
+      <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline"></div>
+        <!-- Default to the left -->
+        <small
+          >Copyright &copy; 2021 <a href="https://Jajirx.in">Jajirx</a>. All
+          rights reserved.</small
+        >
+      </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!--Modals-->
+
+    <!-- ADD MODAL Order -->
+    <div
+      class="modal fade"
+      id="addOrderModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Order</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addOrderForm">
+              <label>Uuid</label>
+              <input
+                type="text"
+                id="addOrderUuidInput"
+                name="uuid"
+                class="form-control mb-2"
+                placeholder="Uuid"
+              />
+              <label>Has Prescription</label
+              ><select
+                class="form-control mb-2"
+                id="addOrderHasPrescriptionInput"
+              >
+                <option value="0">No</option>
+                <option value="1">Yes</option></select
+              ><label>Hospital Id</label>
+              <input
+                type="number"
+                id="addOrderHospitalIdInput"
+                name="hospital_id"
+                class="form-control mb-2"
+                placeholder="HospitalId"
+              />
+              <label>Hospital Prescription Id</label>
+              <input
+                type="number"
+                id="addOrderHospitalPrescriptionIdInput"
+                name="hospital_prescription_id"
+                class="form-control mb-2"
+                placeholder="HospitalPrescriptionId"
+              />
+              <label>Hospital Patient Id</label>
+              <input
+                type="number"
+                id="addOrderHospitalPatientIdInput"
+                name="hospital_patient_id"
+                class="form-control mb-2"
+                placeholder="HospitalPatientId"
+              />
+              <label>Patient Details Id</label>
+              <input
+                type="text"
+                id="addOrderPatientDetailsIdInput"
+                name="patient_details_id"
+                class="form-control mb-2"
+                placeholder="Patient Details Id"
+              />
+              <label>Discount</label>
+              <input
+                type="number"
+                id="addOrderDiscountInput"
+                name="discount"
+                class="form-control mb-2"
+                placeholder="Discount"
+              />
+              <label>Status</label
+              ><select class="form-control mb-2" id="addOrderStatusInput">
+                <option value="0">Ordered</option>
+                <option value="1">Delivered</option>
+                <option value="2">Cancelled</option></select
+              ><label>Order Date</label>
+              <input
+                type="date"
+                id="addOrderOrderDateInput"
+                name="order_date"
+                class="form-control mb-2"
+                placeholder="Order Date"
+              />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Order -->
+    <div
+      class="modal fade"
+      id="editOrderModal"
+      tabindex="-1"
+      aria-labelledby="OrderModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="OrderModalLabel">Edit Order</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editOrderForm">
+              <label>Uuid</label>
+              <input
+                type="text"
+                id="editOrderUuidInput"
+                name="uuid"
+                class="form-control mb-2"
+                placeholder="Uuid"
+              />
+              <label>Has Prescription</label
+              ><select
+                class="form-control mb-2"
+                id="editOrderHasPrescriptionInput"
+              >
+                <option value="0">No</option>
+                <option value="1">Yes</option></select
+              ><label>Hospital Id</label>
+              <input
+                type="text"
+                id="editOrderHospitalIdInput"
+                name="hospital_id"
+                class="form-control mb-2"
+                placeholder="Hospital_id"
+              />
+              <label>Hospital Prescription Id</label>
+              <input
+                type="text"
+                id="editOrderHospitalPrescriptionIdInput"
+                name="hospital_prescription_id"
+                class="form-control mb-2"
+                placeholder="Hospital_prescription_id"
+              />
+              <label>Hospital Patient Id</label>
+              <input
+                type="text"
+                id="editOrderHospitalPatientIdInput"
+                name="hospital_patient_id"
+                class="form-control mb-2"
+                placeholder="Hospital_patient_id"
+              />
+              <label>Patient Details Id</label>
+              <input
+                type="text"
+                id="editOrderPatientDetailsIdInput"
+                name="patient_details_id"
+                class="form-control mb-2"
+                placeholder="Patient_details_id"
+              />
+              <label>Discount</label>
+              <input
+                type="text"
+                id="editOrderDiscountInput"
+                name="discount"
+                class="form-control mb-2"
+                placeholder="Discount"
+              />
+              <label>Status</label
+              ><select class="form-control mb-2" id="editOrderStatusInput">
+                <option value="0">Ordered</option>
+                <option value="1">Delivered</option>
+                <option value="2">Cancelled</option></select
+              ><label>Order Date</label>
+              <input
+                type="text"
+                id="editOrderOrderDateInput"
+                name="order_date"
+                class="form-control mb-2"
+                placeholder="Order_date"
+              />
+              <input type="hidden" id="editOrderOrderId" />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDER ITEM MODAL Order -->
+    <div
+      class="modal fade"
+      id="orderItemModal"
+      tabindex="-1"
+      aria-labelledby="OrderItemModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="OrderModalLabel">Order Items</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <td>#</td>
+                    <td>Drug Code</td>
+                    <td>Drug Name</td>
+                    <td>Quantity</td>
+                    <td>Total Price</td>
+                  </tr>
+                </thead>
+                <tbody id="orderItemTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="orderStatusModal"
+      tabindex="-1"
+      aria-labelledby="OrderStatusModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="OrderStatusModalLabel">Order</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="orderStatusId" />
+            <span>Current Status <span id="orderCurrentStatus"></span></span>
+            <br />
+            <select class="form-control" id="orderNewStatus" name="status">
+              <option value="2">Cancelled</option>
+              <option value="5">Preparing</option>
+              <option value="6">Shipped</option>
+            </select>
+            <br />
+            <textarea
+              class="form-control"
+              id="orderStatusMessage"
+              placeholder="Message on cancelled"
+            ></textarea>
+            <button class="btn btn-primary" onclick="updateOrderStatus()">
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDER CONFIRM MODAL Order -->
+    <div
+      class="modal fade"
+      id="orderConfirmModal"
+      tabindex="-1"
+      aria-labelledby="OrderConfirmModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="OrderModalLabel">Order</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <h5>Order #<span id="acceptOrderId2"></span></h5>
+              <h5>Total Amount: $<span id="acceptOrderAmount">0.00</span></h5>
+              <input type="hidden" id="acceptOrderId" value="" />
+              <label>Payment Mode</label>
+              <select
+                class="form-control"
+                id="payment_type"
+                onchange="paymentTypeChanged(this.value)"
+              >
+                <option value="0">Cash</option>
+                <option value="1">Cheque</option>
+                <option value="2">Online</option>
+              </select>
+              <div class="pm pm-cheque hide">
+                <label>Cheque No</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pm_cheque_no"
+                  placeholder="Cheque no"
+                />
+                <label>Bank Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pm_bank_name"
+                  placeholder="Cheque no"
+                />
+                <label>Account Holder Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pm_ac_holder_name"
+                  placeholder="Account holder name"
+                />
+                <label>Cheque Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="pm_cheque_date"
+                  placeholder="yyyy-mm-dd"
+                />
+              </div>
+              <div class="pm pm-online hide">
+                <label>Transaction Id</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pm_transaction_id"
+                  placeholder="Transaction Id"
+                />
+              </div>
+              <br />
+              <label>Additional Information</label>
+              <textarea
+                id="additional_information"
+                class="form-control"
+                placeholder="Additional information"
+              ></textarea>
+              <button class="btn btn-success mt-2" onclick="submitAcceptForm()">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="./../js/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="./../js/bootstrap.bundle.min.js"></script>
+    <!-- Sweet Alert 4 -->
+    <script src="./../js/sweetalert.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="./../js/adminlte.js"></script>
+    <script src="./../js/dashboard.js"></script>
+    <script src="./../js/common_script.js"></script>
+    <script src="./js/script.js"></script>
+
+    <script src="./js/hospital_order.js"></script>
+  </body>
+</html>
