@@ -81,7 +81,14 @@
 												
 					},
 				    });
-				    
+				    user.associate = function(models) {
+					user.belongsTo(models.pharmacy_profile, {
+						foreignKey: "pharmacy_user_id",
+						as: "pharmacy_profile",
+			            constraints: false
+					});
+
+				};
 
 					return user;
 				}

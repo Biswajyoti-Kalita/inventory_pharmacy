@@ -258,6 +258,15 @@ module.exports = {
           const role_id = 1,
             is_owner = 1;
 
+          if (
+            req.body.pharmacy_id === null ||
+            req.body.pharmacy_id === undefined
+          )
+            return res.send({
+              status: "error",
+              message: " pharmacy Id is required ",
+            });
+
           if (req.body.first_name === null || req.body.first_name === undefined)
             return res.send({
               status: "error",
@@ -290,6 +299,7 @@ module.exports = {
             role_id: role_id,
             permissions: "3",
             is_owner: is_owner,
+            pharmacy_user_id: req.body.pharmacy_id,
             username: randomstring.generate(),
             password: await passwordService.hashPassword(req.body.password),
           });

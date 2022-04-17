@@ -16,7 +16,7 @@ module.exports = {
             console.log("decode \n", decode);
             if (decode.is_owner) {
               req.user_id = decode.id;
-              req.pharmacy_user_id = decode.id;
+              req.pharmacy_user_id = decode.pharmacy_user_id;
             } else {
               req.user_id = decode.id;
               req.pharmacy_user_id = decode.pharmacy_user_id;
