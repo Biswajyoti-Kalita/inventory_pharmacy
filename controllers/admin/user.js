@@ -364,7 +364,21 @@ module.exports = {
           console.log(where);
           const list = await db.user.findAll({
             where,
-            attributes: ["id", "first_name", "last_name", "phone", "email"],
+            attributes: [
+              "id",
+              "first_name",
+              "last_name",
+              "phone",
+              "email",
+              ["pharmacy_user_id", "pharmacy_id"],
+            ],
+            include: [
+              {
+                model: db.pharmacy_profile,
+                as: "pharmacy_profile",
+                attributes: ["id", "name", "regn_no", "owner_name"],
+              },
+            ],
           });
 
           res.send(list);

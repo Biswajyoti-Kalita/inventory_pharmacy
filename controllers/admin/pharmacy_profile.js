@@ -188,12 +188,45 @@ module.exports = {
           order_arr = [[order, order_by]];
         }
 
-        if (req.body.name != null) where["name"] = req.body.name;
+        const { name, regn_no, email, phone } = req.body;
 
-        if (req.body.regn_no != null) where["regn_no"] = req.body.regn_no;
+        if (name) {
+          where = {
+            ...where,
+            name: {
+              [Op.like]: "%" + name + "%",
+            },
+          };
+        }
+        if (regn_no) {
+          where = {
+            ...where,
+            regn_no: {
+              [Op.like]: "%" + regn_no + "%",
+            },
+          };
+        }
+        if (email) {
+          where = {
+            ...where,
+            email: {
+              [Op.like]: "%" + email + "%",
+            },
+          };
+        }
+
+        if (phone) {
+          where = {
+            ...where,
+            phone: {
+              [Op.like]: "%" + phone + "%",
+            },
+          };
+        }
+        //        if (req.body.regn_no != null) where["regn_no"] = req.body.regn_no;
 
         try {
-          const pharmacy_profiles = await db.pharmacy_profile.findAndCountAll({
+          const pharmacy_profiles = await db.pharmacy_profile.findAll({
             where: where,
             offset: req.body.offset ? +req.body.offset : null,
             limit: req.body.limit ? +req.body.limit : 25,
