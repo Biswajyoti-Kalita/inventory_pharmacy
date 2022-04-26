@@ -61,6 +61,11 @@ let menus = {
     name: "Insurance",
     icon: "fas fa-industry fa-fw",
   },
+  hospital_profile: {
+    link: "hospital_profile",
+    name: "Hospital Profile",
+    icon: "fas fa-address-card fa-fw",
+  },
 };
 
 function decodePermissions(val) {
@@ -103,6 +108,7 @@ async function isAllowed() {
     if (data.is_owner) {
       permissions.push("users");
     }
+    permissions.push("hospital_profile");
 
     let dataPermissions = decodePermissions(data.permissions);
     if (dataPermissions) {
@@ -110,7 +116,12 @@ async function isAllowed() {
         if (item) permissions.push(item);
       });
     }
-    console.log("total permissions ", permissions.toString());
+    console.log(
+      "total permissions ",
+      permissions.toString(),
+      currentPage,
+      permissions.indexOf(currentPage)
+    );
     if (permissions[0]) {
       if (permissions.indexOf(currentPage) < 0 && currentPage != "home") {
         showError();
