@@ -249,6 +249,14 @@ module.exports = {
       roleService.verifyRole(role),
       async function (req, res) {
         try {
+          const { id } = req.body;
+
+          if (id === null || id === undefined)
+            return res.send({
+              status: "error",
+              message: " ID is required ",
+            });
+
           const pharmacy_profile = await db.pharmacy_profile.findOne({
             where: {
               id: req.body.id,

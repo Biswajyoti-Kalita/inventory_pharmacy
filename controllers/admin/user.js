@@ -13,6 +13,7 @@ var db = require("./../../models");
 var file_upload = require("./../../services/upload");
 var roleService = require("./../../services/roleService");
 var passwordService = require("./../../services/passwordService");
+const axiosService = require("./../../services/axiosService");
 
 module.exports = {
   initializeApi: function (app) {
@@ -21,6 +22,9 @@ module.exports = {
     const toLowerCase = (string) => {
       return string.toLowerCase();
     };
+    const emr_admin_token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJhZG1pbl90eXBlIjowLCJpZCI6MiwiaWF0IjoxNjQzMjY1Mzg4fQ.DOWxeIL5HgsV5MRqwgSJV5KjqfkcBoeJeW-TM1kjDVI";
+    const emr_url = "https://emrapi.jajirx.com";
 
     const role = 0;
     app.post(
@@ -506,6 +510,7 @@ module.exports = {
             role_id: role_id,
             is_owner: 0,
           };
+          let hospitals = {};
 
           const { first_name, last_name, phone, email } = req.body;
 
@@ -544,6 +549,18 @@ module.exports = {
           }
           console.log(where);
 
+          const hospitalList = await axiosService.postRequest(
+            emr_url + "/admin/gethospitals",
+            {},
+            { token: emr_admin_token }
+          );
+
+          if (hospitalList && hospitalList.data) {
+            hospitalList.data.map((item) => {
+              hospitals[item.id] = item;
+            });
+          }
+
           let data = await db.user.findAll({
             where,
             attributes: [
@@ -570,6 +587,14 @@ module.exports = {
                 : null,
             };
           });
+
+          data = data.map((i) => {
+            return {
+              ...i,
+              hospital: i.hospital_id ? hospitals[i.hospital_id] : null,
+            };
+          });
+
           res.send(data);
         } catch (error) {
           console.log(error);
