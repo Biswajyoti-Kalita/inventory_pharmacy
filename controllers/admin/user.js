@@ -24,7 +24,7 @@ module.exports = {
     };
     const emr_admin_token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJhZG1pbl90eXBlIjowLCJpZCI6MiwiaWF0IjoxNjQzMjY1Mzg4fQ.DOWxeIL5HgsV5MRqwgSJV5KjqfkcBoeJeW-TM1kjDVI";
-    const emr_url = "https://emrapi.jajirx.com";
+    const emr_url = process.env.EMR_API_URL;
 
     const role = 0;
     app.post(
