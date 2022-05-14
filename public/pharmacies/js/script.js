@@ -1,5 +1,5 @@
 let hostName = location.hostname.replace(".jajirx.com", "");
-
+let isSuperUser = false;
 if (hostName === "inventory") {
   document.title = document.title.replace("Pharmacies", "");
   $(".user-panel .d-block").text(capitalizeFirstLetter(hostName));
@@ -61,6 +61,11 @@ let menus = {
     name: "Insurance",
     icon: "fas fa-industry fa-fw",
   },
+  pharmacy_profile: {
+    link: "pharmacy_profile",
+    name: "Pharmacy Profile",
+    icon: "fas fa-address-card fa-fw",
+  },
 };
 
 function decodePermissions(val) {
@@ -102,7 +107,9 @@ async function isAllowed() {
     );
     if (data.is_owner) {
       permissions.push("users");
+      isSuperUser = true;
     }
+    permissions.push("pharmacy_profile");
 
     let dataPermissions = decodePermissions(data.permissions);
     if (dataPermissions) {

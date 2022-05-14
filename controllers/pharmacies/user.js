@@ -26,7 +26,7 @@ module.exports = {
         try {
           const role_id = 1,
             is_owner = 0,
-            pharmacy_user_id = req.user_id;
+            pharmacy_user_id = req.pharmacy_user_id;
 
           if (req.body.first_name === null || req.body.first_name === undefined)
             return res.send({
@@ -46,6 +46,19 @@ module.exports = {
               message: " Password is required ",
             });
 
+          console.log({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name ? req.body.last_name : "",
+            phone: req.body.phone ? req.body.phone : "",
+            email: req.body.email,
+            role_id: role_id,
+            permissions: req.body.permissions ? req.body.permissions : "",
+            is_owner: is_owner,
+            pharmacy_user_id: pharmacy_user_id,
+            username: randomstring.generate(),
+            password: await passwordService.hashPassword(req.body.password),
+          });
+
           await db.user.create({
             first_name: req.body.first_name,
             last_name: req.body.last_name ? req.body.last_name : "",
@@ -63,6 +76,7 @@ module.exports = {
             message: "done",
           });
         } catch (error) {
+          console.log(error);
           res.send({
             status: "error",
             message: error,
@@ -177,11 +191,7 @@ module.exports = {
         let where = {
           [Op.or]: [
             {
-              pharmacy_user_id: req.user_id,
-            },
-            {
-              id: req.user_id,
-              is_owner: 1,
+              pharmacy_user_id: req.pharmacy_user_id,
             },
           ],
         };
