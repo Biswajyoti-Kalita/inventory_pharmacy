@@ -25,6 +25,9 @@
   <body class="bg-light">
     <div class="row justify-content-md-center m-2 mt-5">
       <div class="col-md-4 text-center">
+        <div class="alert alert-warning alert-dismissible fade" role="alert">
+          <strong>Error</strong> <span id="errMsg"></span>
+        </div>
         <h4 class="text-center mt-5">Jajirx</h4>
         <div class="card shadow p-3 pb-4">
           <form action="#" class="form" id="loginForm">
@@ -118,5 +121,19 @@
         border: 1px solid #cdcdf7;
       }
     </style>
+    <script>
+      $(document).ready(function () {
+        console.log("ready!");
+        let msg = location.search;
+        console.log(msg);
+        if (msg && msg.indexOf("?message=") == 0) {
+          console.log("insde");
+          $(".alert").addClass("show");
+          $("#errMsg").html(
+            `${location.search.replace("?message=", "").replace("+", " ")}`
+          );
+        }
+      });
+    </script>
   </body>
 </html>

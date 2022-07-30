@@ -43,7 +43,9 @@ module.exports = {
         console.log(user);
         if (isSame) {
           delete user["password"];
-          var token = jwt.sign(user, process.env.SECRET_KEY, {});
+          var token = jwt.sign(user, process.env.SECRET_KEY, {
+            expiresIn: process.env.JWTExpiriesIn,
+          });
           res.send({
             status: "success",
             token: token,

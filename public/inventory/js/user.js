@@ -39,6 +39,8 @@ function getUsers(searchObj) {
     data: data,
     success: function (resultData) {
       console.log(result);
+      checkSession(resultData);
+
       var result = resultData.rows;
       var count = resultData.count;
       $("#userTableBody").html("");
@@ -152,6 +154,8 @@ function addUser() {
       token: Cookies.get("token"),
     },
     success: function (result) {
+      checkSession(result);
+
       $(".pms").prop("checked", false);
       console.log(result);
       if (result.status == "success") {
@@ -203,6 +207,8 @@ function updateUser() {
       token: Cookies.get("token"),
     },
     success: function (result) {
+      checkSession(result);
+
       $(".pms_edit").prop("checked", false);
       console.log(result);
       if (result.status == "success") {
@@ -261,6 +267,7 @@ function deleteUser(id) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal({
           title: "User Deleted successfully",
@@ -303,6 +310,7 @@ function bulkDeleteUser(ids) {
       token: Cookies.get("token"),
     },
     success: function (result) {
+      checkSession(result);
       console.log(result);
       if (result.status == "success") {
         swal({

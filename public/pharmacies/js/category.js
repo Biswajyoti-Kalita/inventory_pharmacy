@@ -39,6 +39,7 @@ function getCategorys(searchObj) {
     data: data,
     success: function (resultData) {
       console.log(result);
+      checkSession(resultData);
       var result = resultData.rows;
       var count = resultData.count;
       $("#categoryTableBody").html("");
@@ -119,6 +120,7 @@ function addCategory() {
       token: Cookies.get("token"),
     },
     success: function (result) {
+      checkSession(result);
       console.log(result);
       if (result.status == "success") {
         $("#addCategoryForm input, #addCategoryForm textarea").val("");
@@ -160,6 +162,7 @@ function updateCategory() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         $("#editCategoryForm input, #editCategoryForm textarea").val("");
         $("#editCategoryModal").modal("hide");
@@ -201,6 +204,7 @@ function deleteCategory(id) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal({
           title: "Category Deleted successfully",
@@ -244,6 +248,7 @@ function bulkDeleteCategory(ids) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal({
           title: "Categories Deleted successfully",

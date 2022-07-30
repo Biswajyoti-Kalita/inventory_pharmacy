@@ -17,6 +17,7 @@ function getHospitalprofile(searchObj) {
     data: data,
     success: function (result) {
       console.log(result);
+      checkSession(result);
 
       if (result.data && result.data.name) {
         $("#viewhospital_profileNameInput").text(result.data.name);

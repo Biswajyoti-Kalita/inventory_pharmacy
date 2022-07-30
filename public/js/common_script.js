@@ -62,7 +62,6 @@ function exportTable(table_id, separator = ",") {
   link.click();
   document.body.removeChild(link);
 }
-
 function checkSelected(tablename) {
   var items = $(".checkbox-" + tablename);
   var selectedChecks = 0;
@@ -73,7 +72,6 @@ function checkSelected(tablename) {
   if (selectedChecks == 0) $("#bulkDelete" + tablename).hide();
   else $("#bulkDelete" + tablename).show();
 }
-
 function getPaginate(count, callback, limit, offset, tablename) {
   console.log(count, callback, limit, offset, tablename);
   var totalItems = count,
@@ -156,15 +154,12 @@ function getPaginate(count, callback, limit, offset, tablename) {
     }
   }
 }
-
 function changeOffset(val, callback) {
   callback(val);
 }
-
 $(".pagination-link").on("click", (ev) => {
   ev.preventDefault();
 });
-
 function generateRandomId(length) {
   var result = "";
   var characters =
@@ -175,7 +170,6 @@ function generateRandomId(length) {
   }
   return result;
 }
-
 async function csvToArray(csvFile, delimiter = ",") {
   let str = await csvToString(csvFile);
   const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
@@ -206,9 +200,7 @@ const csvToString = (csvFile) => {
     }
   });
 };
-
 // CUSTOM  EXPORT
-
 function customExportTable(table_id, separator = ",") {
   // Select rows from table_id
   var rows = document.querySelectorAll("table#table" + table_id + " tr");
@@ -248,11 +240,9 @@ function customExportTable(table_id, separator = ",") {
 
   $("#exportDrugModal").modal("show");
 }
-
 function removeExportRow(table_id, rowId) {
   $("#export" + table_id + "Row" + rowId).remove();
 }
-
 function downloadCustomExportCSV(table_id, separator = ",") {
   // Select rows from table_id
   var rows = document.querySelectorAll("table#export" + table_id + "Table tr");

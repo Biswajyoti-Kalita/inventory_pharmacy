@@ -36,6 +36,7 @@ function getPharmacy_profiles(searchObj) {
     data: data,
     success: function (result) {
       console.log(result);
+      checkSession(result);
 
       if (result) {
         $("#viewPharmacy_profileNameInput").text(result.name);
@@ -96,6 +97,7 @@ function updatePharmacy_profile() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         $(
           "#editPharmacyProfileForm input, #editPharmacyProfileForm textarea"
