@@ -42,6 +42,8 @@ function getPatient_detailss(searchObj) {
     data: data,
     success: function (resultData) {
       console.log(result);
+      checkSession(resultData);
+
       var result = resultData.rows;
       var count = resultData.count;
       $("#patient_detailsTableBody").html("");
@@ -330,6 +332,8 @@ function bulkDeletePatient_details(ids) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
+
       if (result.status == "success") {
         swal({
           title: "Patient_details Deleted successfully",

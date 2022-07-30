@@ -10,6 +10,8 @@ $(document).ready(function () {
   })
     .then((response) => response.json())
     .then(function (data) {
+      checkSession(data);
+
       data?.data?.map((item) => {
         hospitals[item.id] = { ...item };
       });
@@ -32,6 +34,7 @@ async function getHospitalDepartments() {
     .catch((error) => {
       console.error("Error:", error);
     });
+  checkSession(data);
 
   $("#filter_hospital_department").html(`<option value="" >All</option>`);
   if (data) {
@@ -78,6 +81,8 @@ function getOrders(searchObj) {
     data: data,
     success: function (resultData) {
       console.log(result);
+      checkSession(resultData);
+
       var result = resultData.rows;
       var count = resultData.count;
       $("#orderTableBody").html("");
@@ -296,6 +301,8 @@ function addOrder() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
+
       if (result.status == "success") {
         $("#addOrderForm input, #addOrderForm textarea").val("");
         $("#addOrderModal").modal("hide");
@@ -346,6 +353,8 @@ function updateOrder() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
+
       if (result.status == "success") {
         $("#editOrderForm input, #editOrderForm textarea").val("");
         $("#editOrderModal").modal("hide");
@@ -452,6 +461,8 @@ function bulkDeleteOrder(ids) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
+
       if (result.status == "success") {
         swal({
           title: "Orders Deleted successfully",
@@ -495,6 +506,8 @@ function dispenseDrug(id) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
+
       if (result.status == "success") {
         swal({
           title: "Order Dispensed successfully",
@@ -524,6 +537,7 @@ function getOrderItems(order_id) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
 
       $("#orderItemTableBody").html("");
       result?.map((item, ind) => {
@@ -551,6 +565,8 @@ function acceptOrderItem(order_id) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
+
       if (result.status == "success") {
         swal({
           title: "Order accepted successfully",
@@ -601,6 +617,8 @@ function submitAcceptForm() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
+
       if (result.status == "success") {
         swal({
           title: "Order Item accepted successfully",

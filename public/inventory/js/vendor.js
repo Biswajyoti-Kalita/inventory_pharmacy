@@ -39,6 +39,7 @@ function getVendors(searchObj) {
     data: data,
     success: function (resultData) {
       console.log(result);
+      checkSession(resultData);
       var result = resultData.rows;
       var count = resultData.count;
       $("#vendorTableBody").html("");
@@ -159,6 +160,7 @@ function addVendor() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         $("#addVendorForm input, #addVendorForm textarea").val("");
         $("#addVendorModal").modal("hide");
@@ -206,6 +208,7 @@ function updateVendor() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         $("#editVendorForm input, #editVendorForm textarea").val("");
         $("#editVendorModal").modal("hide");
@@ -264,6 +267,7 @@ function deleteVendor(id) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal({
           title: "Vendor Deleted successfully",
@@ -307,6 +311,7 @@ function bulkDeleteVendor(ids) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal({
           title: "Vendors Deleted successfully",

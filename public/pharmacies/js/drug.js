@@ -30,6 +30,7 @@ async function getCategories() {
     .catch((error) => {
       console.error("Error:", error);
     });
+  checkSession(data);
   $("#addDrugCategoryInput, #editDrugCategoryInput, #filter_categories").html(
     ""
   );
@@ -57,6 +58,7 @@ async function getDrug(drug_code) {
     .catch((error) => {
       console.error("Error:", error);
     });
+  checkSession(data);
   return data;
 }
 
@@ -83,6 +85,7 @@ function getDrugs(searchObj) {
     data: data,
     success: function (resultData) {
       console.log(result);
+      checkSession(resultData);
       var result = resultData.rows;
       var count = resultData.count;
       $("#drugTableBody").html("");
@@ -258,6 +261,7 @@ function addDrug() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         $("#addDrugForm input, #addDrugForm textarea").val("");
         $("#addDrugModal").modal("hide");
@@ -315,6 +319,7 @@ function updateDrug() {
       token: Cookies.get("token"),
     },
     success: function (result) {
+      checkSession(result);
       console.log(result);
       if (result.status == "success") {
         $("#editDrugForm input, #editDrugForm textarea").val("");
@@ -396,6 +401,7 @@ function deleteDrug(id) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal({
           title: "Drug Deleted successfully",
@@ -439,6 +445,7 @@ function bulkDeleteDrug(ids) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal({
           title: "Drugs Deleted successfully",
@@ -490,6 +497,7 @@ $("#importDrug").on("submit", async (ev) => {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal({
           title: "Drug Imported successfully",

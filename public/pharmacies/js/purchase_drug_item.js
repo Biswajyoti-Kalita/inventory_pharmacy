@@ -43,6 +43,7 @@ function getPurchase_drug_items(searchObj) {
     data: data,
     success: function (resultData) {
       console.log(result);
+      checkSession(resultData);
       var result = resultData.rows;
       var count = resultData.count;
       $("#purchase_drug_itemTableBody").html("");
@@ -188,6 +189,7 @@ function addPurchaseDrugItemWithItem(items) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         purchaseDrugListItem = [];
         $("#purchaseDrugItemList").html("");
@@ -344,6 +346,7 @@ function updatePurchase_drug_item() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         $(
           "#editPurchase_drug_itemForm input, #editPurchase_drug_itemForm textarea"
@@ -397,6 +400,7 @@ function deletePurchase_drug_item(id) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal({
           title: "Purchase_drug_item Deleted successfully",
@@ -440,6 +444,7 @@ function bulkDeletePurchase_drug_item(ids) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal({
           title: "Purchase_drug_items Deleted successfully",
@@ -483,6 +488,7 @@ function getVendors(searchObj) {
     method: "POST",
     data: data,
     success: function (resultData) {
+      checkSession(resultData);
       var result = resultData.rows;
       var count = resultData.count;
       $("#addPurchaseDrugItemVendorIdInput").html("");
@@ -511,6 +517,7 @@ async function getDrug(drug_code) {
     .catch((error) => {
       console.error("Error:", error);
     });
+  checkSession(data);
   return data;
 }
 function addDrug() {
@@ -533,6 +540,7 @@ function addDrug() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         $("#addDrugForm input, #addDrugForm textarea").val("");
         $("#addDrugModal").modal("hide");

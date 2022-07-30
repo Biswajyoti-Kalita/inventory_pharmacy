@@ -41,7 +41,8 @@ function getInsurance_companys(searchObj) {
     method: "POST",
     data: data,
     success: function (resultData) {
-      console.log(result);
+      //      console.log(result);
+      checkSession(resultData);
       var result = resultData.rows;
       var count = resultData.count;
       $("#insurance_companyTableBody").html("");
@@ -175,6 +176,7 @@ function addInsurance_company() {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         $(
           "#addInsurance_companyForm input, #addInsurance_companyForm textarea"
@@ -225,6 +227,8 @@ function updateInsurance_company() {
       token: Cookies.get("token"),
     },
     success: function (result) {
+      checkSession(result);
+
       console.log(result);
       if (result.status == "success") {
         $(
@@ -303,6 +307,8 @@ function deleteInsurance_company(id) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
+
       if (result.status == "success") {
         swal({
           title: "Insurance_company Deleted successfully",
@@ -346,6 +352,8 @@ function bulkDeleteInsurance_company(ids) {
     },
     success: function (result) {
       console.log(result);
+      checkSession(result);
+
       if (result.status == "success") {
         swal({
           title: "Insurance_companies Deleted successfully",

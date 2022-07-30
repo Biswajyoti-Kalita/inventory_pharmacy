@@ -66,6 +66,11 @@ let menus = {
     name: "Pharmacy Profile",
     icon: "fas fa-address-card fa-fw",
   },
+  change_password: {
+    link: "change_password",
+    name: "Change Password",
+    icon: "fas fa-key fa-fw",
+  },
 };
 
 function decodePermissions(val) {
@@ -75,6 +80,14 @@ function decodePermissions(val) {
     return "inventory,vendor,purchase,category,insurance_company,patient_order,cart";
   else if (val == 4) return "hospital_order,inventory,vendor,purchase,category";
   else return "";
+}
+
+function checkSession(data) {
+  if (data.status == "error" && data.msg?.name == "TokenExpiredError") {
+    Cookies.remove("token");
+    location.href = "index.html?message=token+expired";
+  }
+  return;
 }
 
 async function isAllowed() {
@@ -92,6 +105,8 @@ async function isAllowed() {
     .catch((error) => {
       console.error("Error:", error);
     });
+
+  checkSession(data);
   try {
     let currentPage = document.title
       .replace("Pharmacies", "")
@@ -110,6 +125,7 @@ async function isAllowed() {
       isSuperUser = true;
     }
     permissions.push("pharmacy_profile");
+    permissions.push("change_password");
 
     let dataPermissions = decodePermissions(data.permissions);
     if (dataPermissions) {

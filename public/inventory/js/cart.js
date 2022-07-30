@@ -19,6 +19,8 @@ function getInsuranceCompanies() {
   })
     .then((response) => response.json())
     .then(function (data) {
+      checkSession(data);
+
       console.log(data);
 
       $("#pm_insurance_company_id").html("");
@@ -41,6 +43,8 @@ function getHospitals() {
     .then((response) => response.json())
     .then(function (data) {
       console.log(data);
+      checkSession(data);
+
       if (data.data && data.data[0]) {
         $("#cartHospitalId").html(`<option value="">Select Hospital</option>`);
         data.data.map((item) => {
@@ -68,6 +72,7 @@ function getPatient(hospital_patient_id) {
     .then((response) => response.json())
     .then(function (data) {
       console.log(data);
+      checkSession(data);
       if (data) {
         $("#cartPatientId").val(data.id);
         $("#cartPatientFirstName").val(data.first_name ? data.first_name : "");
@@ -110,6 +115,7 @@ function getPrescription(id) {
     .then((response) => response.json())
     .then(function (data) {
       console.log("fill data", data);
+      checkSession(data);
 
       let content = "";
 
@@ -177,6 +183,7 @@ function getPrescriptions() {
     .then((response) => response.json())
     .then(function (data) {
       console.log(data);
+      checkSession(data);
 
       $("#cartPrescriptionTableBody").html("");
       if (data) {
@@ -260,6 +267,7 @@ async function addToCart(drug_code) {
     .catch((error) => {
       console.error("Error:", error);
     });
+  checkSession(data);
 
   console.log("Data ", data);
   if (data && data.id) {
@@ -356,6 +364,7 @@ async function getDrug(drug_code) {
     .catch((error) => {
       console.error("Error:", error);
     });
+  checkSession(data);
   console.log(data);
   if (cartItems.indexOf(drug_code) < 0) {
     cartItems.push(drug_code);
@@ -403,6 +412,7 @@ function getDrugs(searchObj) {
     data: data,
     success: function (resultData) {
       console.log(result);
+      checkSession(resultData);
       var result = resultData.rows;
       var count = resultData.count;
       $("#searchDrugTableBody").html("");
@@ -494,6 +504,7 @@ async function getPatientDetails(id) {
       console.error("Error:", error);
     });
   console.log(data);
+  checkSession(data);
   if (data) {
     $("#cartPatientId").val(data.id);
     $("#cartPatientFirstName").val(data.first_name ? data.first_name : "");
@@ -538,6 +549,7 @@ function getPatientDetailss(searchObj) {
     data: data,
     success: function (resultData) {
       console.log(result);
+      checkSession(resultData);
       var result = resultData.rows;
       var count = resultData.count;
       $("#searchPatientDetailsTableBody").html("");
@@ -641,6 +653,7 @@ function submitCart() {
     data: data,
     success: function (result) {
       console.log(result);
+      checkSession(result);
       if (result.status == "success") {
         swal("Success", "Ordered made successfully", "success");
         setTimeout(() => {
