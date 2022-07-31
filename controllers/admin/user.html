@@ -1,441 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Umbrella Solution" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Users</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="./../css/adminlte.css" />
+    <link rel="stylesheet" href="./../css/style.css" />
+    <script src="./../js/cookie.umd.min.js"></script>
+  </head>
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav
+        class="main-header navbar navbar-expand navbar-white navbar-light"
+        style="background-color: #537c9d; color: white"
+      >
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"
+              ><i class="fas fa-bars" style="color: white"></i
+            ></a>
+          </li>
+        </ul>
 
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="utf-8">
-          <meta
-            name="author"
-            content="Umbrella Solution"
-          />
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <title>Admin Users</title>
-          <!-- Google Font: Source Sans Pro -->
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-          <!-- Font Awesome Icons -->
-          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">    
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-          <!-- Theme style -->
-          <link rel="stylesheet" href="./../css/adminlte.css">
-          <link rel="stylesheet" href="./../css/style.css">
-          <script src="./../js/cookie.umd.min.js"></script>
-        </head>
-        <body class="hold-transition sidebar-mini">
-        <div class="wrapper">
-        
-          <!-- Navbar -->
-          <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Navbar Search -->
+          <li class="nav-item">
+            <span
+              class="nav-link"
+              onclick="logout()"
+              style="color: white"
+              role="button"
+            >
+              <i class="fas fa-sign-out-alt" style="color: white"></i> Logout
+            </span>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/" class="brand-link text-center">
+          <span class="brand-text font-weight-light">Umbrella Solution</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img
+                src="./../image/default-pic.webp"
+                class="img-circle elevation-2"
+                id="userImage"
+                alt="User Image"
+              />
+            </div>
+            <div class="info">
+              <a href="dashboard.html" class="d-block">Admin</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul
+              class="nav nav-pills nav-sidebar flex-column"
+              data-widget="treeview"
+              role="menu"
+              data-accordion="false"
+            >
+              <!-- Add icons to the links using the .nav-icon class
+                       with font-awesome or any other icon font library -->
+
               <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                <a href="/user.html" class="nav-link active">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Users</p>
+                </a>
               </li>
-            </ul>
-        
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-              <!-- Navbar Search -->
+
               <li class="nav-item">
-                <span class="nav-link" onclick="logout()" role="button">
-                  <i class="fas fa-sign-out-alt"></i> Logout
-                </span>
+                <a href="/drug.html" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Drug</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/vendor.html" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Vendor</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/purchase_drug.html" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Purchase_drug</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/purchase_drug_item.html" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Purchase_drug_item</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/purchase_return_drug.html" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Purchase_return_drug</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/order.html" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Order</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/order_item.html" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Order_item</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/order_return.html" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Order_return</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/patient_details.html" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Patient_details</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="change_password.html" class="nav-link">
+                  <i class="nav-icon fas fa-key"></i>
+                  <p>Change Password</p>
+                </a>
               </li>
             </ul>
           </nav>
-          <!-- /.navbar -->
-        
-          <!-- Main Sidebar Container -->
-          <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="/" class="brand-link text-center">
-              <span class="brand-text font-weight-light">Umbrella Solution</span>
-            </a>
-        
-            <!-- Sidebar -->
-            <div class="sidebar">
-              <!-- Sidebar user panel (optional) -->
-              <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                  <img src="./../image/default-pic.webp" class="img-circle elevation-2" id="userImage" alt="User Image">
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h3 class="m-0" id="currentMenuTitle"></h3>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid panels" id="menu_user" style="">
+            <div class="card">
+              <form id="searchUserForm" action="#">
+                <div class="card-header">
+                  <h3 class="card-title">Filter</h3>
                 </div>
-                <div class="info">
-                  <a href="dashboard.html" class="d-block">Admin</a>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>First Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="first_name"
+                          placeholder="First Name"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Last Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="last_name"
+                          placeholder="Last Name"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Phone</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="phone"
+                          placeholder="Phone"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="email"
+                          placeholder="Email"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="password"
+                          placeholder="Password"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label>Role Id</label>
+
+                        <select class="form-control" name="role_id">
+                          <option value="">All</option>
+                          <option value="0">Admin</option>
+                          <option value="1">Pharmacies</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-sm btn-info">
+                    Search
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title mb-1 mt-1">Users Table</h3>
+                <div class="card-tools mb-1 mt-1 row">
+                  <div class="">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-danger"
+                      style="display: none"
+                      onclick='bulkDelete("User")'
+                      id="bulkDeleteUser"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="exportTable('User')"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <button
+                      type="submit"
+                      class="btn btn-sm btn-primary"
+                      onclick="addUserModal()"
+                    >
+                      <i class="fas fa-plus-circle"></i>
+                    </button>
+                  </div>
+
+                  <div class="ml-2">
+                    <select
+                      class="btn btn-sm border"
+                      onchange="changeUsersTableLimit(this.value)"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                      <option value="">All</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-        
-              <!-- Sidebar Menu -->
-              <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                  <!-- Add icons to the links using the .nav-icon class
-                       with font-awesome or any other icon font library -->
-                  
-	      	<li class="nav-item">
-	            <a href="/user.html" class="nav-link active">
-	              <i class="nav-icon fas fa-user"></i>
-	              <p>
-                	Users
-	              </p>
-	            </a>
-	        </li>
- 
-		
-	      	<li class="nav-item">
-	            <a href="/drug.html" class="nav-link ">
-	              <i class="nav-icon fas fa-user"></i>
-	              <p>
-                	Drug
-	              </p>
-	            </a>
-	        </li>
- 
-		
-	      	<li class="nav-item">
-	            <a href="/vendor.html" class="nav-link ">
-	              <i class="nav-icon fas fa-user"></i>
-	              <p>
-                	Vendor
-	              </p>
-	            </a>
-	        </li>
- 
-		
-	      	<li class="nav-item">
-	            <a href="/purchase_drug.html" class="nav-link ">
-	              <i class="nav-icon fas fa-user"></i>
-	              <p>
-                	Purchase_drug
-	              </p>
-	            </a>
-	        </li>
- 
-		
-	      	<li class="nav-item">
-	            <a href="/purchase_drug_item.html" class="nav-link ">
-	              <i class="nav-icon fas fa-user"></i>
-	              <p>
-                	Purchase_drug_item
-	              </p>
-	            </a>
-	        </li>
- 
-		
-	      	<li class="nav-item">
-	            <a href="/purchase_return_drug.html" class="nav-link ">
-	              <i class="nav-icon fas fa-user"></i>
-	              <p>
-                	Purchase_return_drug
-	              </p>
-	            </a>
-	        </li>
- 
-		
-	      	<li class="nav-item">
-	            <a href="/order.html" class="nav-link ">
-	              <i class="nav-icon fas fa-user"></i>
-	              <p>
-                	Order
-	              </p>
-	            </a>
-	        </li>
- 
-		
-	      	<li class="nav-item">
-	            <a href="/order_item.html" class="nav-link ">
-	              <i class="nav-icon fas fa-user"></i>
-	              <p>
-                	Order_item
-	              </p>
-	            </a>
-	        </li>
- 
-		
-	      	<li class="nav-item">
-	            <a href="/order_return.html" class="nav-link ">
-	              <i class="nav-icon fas fa-user"></i>
-	              <p>
-                	Order_return
-	              </p>
-	            </a>
-	        </li>
- 
-		
-	      	<li class="nav-item">
-	            <a href="/patient_details.html" class="nav-link ">
-	              <i class="nav-icon fas fa-user"></i>
-	              <p>
-                	Patient_details
-	              </p>
-	            </a>
-	        </li>
- 
-		
-                  <li class="nav-item">
-                    <a href="change_password.html" class="nav-link">
-                      <i class="nav-icon fas fa-key"></i>
-                      <p>
-                        Change Password
-                      </p>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-              <!-- /.sidebar-menu -->
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover text-nowrap" id="tableUser">
+                    <thead id="userTableHead">
+                      <tr>
+                        <th style="width: 50px">
+                          <input
+                            type="checkbox"
+                            id="bulkSelectUser"
+                            onclick="bulkSelect('User')"
+                            name=""
+                          />
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            ID
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="idSortASC"
+                                onclick="changeUsersTableOrder('id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="idSortDESC"
+                                onclick="changeUsersTableOrder('id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            First Name
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="first_nameSortASC"
+                                onclick="changeUsersTableOrder('first_name','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="first_nameSortDESC"
+                                onclick="changeUsersTableOrder('first_name','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Last Name
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="last_nameSortASC"
+                                onclick="changeUsersTableOrder('last_name','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="last_nameSortDESC"
+                                onclick="changeUsersTableOrder('last_name','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Phone
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="phoneSortASC"
+                                onclick="changeUsersTableOrder('phone','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="phoneSortDESC"
+                                onclick="changeUsersTableOrder('phone','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Email
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="emailSortASC"
+                                onclick="changeUsersTableOrder('email','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="emailSortDESC"
+                                onclick="changeUsersTableOrder('email','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>
+                          <div style="display: flex">
+                            Role_id
+                            <div style="margin-left: auto; margin-top: 3px">
+                              <i
+                                class="bi bi-sort-up sort-icon cursor-p fade-l"
+                                style=""
+                                id="role_idSortASC"
+                                onclick="changeUsersTableOrder('role_id','ASC')"
+                              ></i>
+                              <i
+                                class="bi bi-sort-down cursor-p sort-icon fade-l"
+                                id="role_idSortDESC"
+                                onclick="changeUsersTableOrder('role_id','DESC')"
+                              ></i>
+                            </div>
+                          </div>
+                        </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="userTableBody"></tbody>
+                  </table>
+                </div>
+                <div
+                  style="float: right"
+                  class="pagination"
+                  id="paginationUser"
+                ></div>
+              </div>
             </div>
-            <!-- /.sidebar -->
-          </aside>
-        
-          <!-- Content Wrapper. Contains page content -->
-          <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-              <div class="container-fluid">
-                <div class="row mb-2">
-                  <div class="col-sm-6">
-                    <h3 class="m-0" id="currentMenuTitle" ></h3>
-                  </div><!-- /.col -->
-                </div><!-- /.row -->
-              </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
-        
-            <!-- Main content -->
-            <div class="content">
-              
-	
-	      <div class="container-fluid panels" id="menu_user" style="  ">
-	      	
-	        <div class="card">
-	          <form id="searchUserForm" action="#">
-	          <div class="card-header">
-	            <h3 class="card-title">Filter</h3>
-	          </div>
-	          <div class="card-body">
-	            <div class="row">
-
-		
-		              <div class="col-md-4 col-lg-4">
-		                <div class="form-group">
-		                  <label>First Name</label>
-		                  <input type="text" class="form-control" name="first_name" placeholder="First Name"></div>
-		              </div>
-			
-		              <div class="col-md-4 col-lg-4">
-		                <div class="form-group">
-		                  <label>Last Name</label>
-		                  <input type="text" class="form-control" name="last_name" placeholder="Last Name"></div>
-		              </div>
-			
-		              <div class="col-md-4 col-lg-4">
-		                <div class="form-group">
-		                  <label>Phone</label>
-		                  <input type="text" class="form-control" name="phone" placeholder="Phone"></div>
-		              </div>
-			
-		              <div class="col-md-4 col-lg-4">
-		                <div class="form-group">
-		                  <label>Email</label>
-		                  <input type="text" class="form-control" name="email" placeholder="Email"></div>
-		              </div>
-			
-		              <div class="col-md-4 col-lg-4">
-		                <div class="form-group">
-		                  <label>Password</label>
-		                  <input type="text" class="form-control" name="password" placeholder="Password"></div>
-		              </div>
-			
-		              <div class="col-md-4 col-lg-4">
-		                <div class="form-group">
-		                  <label>Role Id</label>
-		                  
-						    <select class="form-control" name="role_id" >
-					    		<option value="">All</option>
-						    <option value="0"> Admin</option><option value="1"> Pharmacies</option></select></div>
-		              </div>
-			
-	            </div>            
-	          </div>
-	          <div class="card-footer">
-	            <button type="submit" class="btn btn-sm btn-info" >Search</button>
-	          </div>
-	          </form>
-	        </div>
-	        
-	        <div class="card">
-	          <div class="card-header">
-	            <h3 class="card-title mb-1 mt-1">Users Table</h3>
-	            <div class="card-tools mb-1 mt-1 row">
-	            	
-		<div class="" >
-		  <button type="submit" class="btn btn-sm btn-danger" style="display: none;" onclick='bulkDelete("User")' id='bulkDeleteUser' >
-		    <i class="fas fa-trash"></i> 		    
-		  </button>
-		</div>
-	
-	            	
-		<div class="ml-2">
-		  <button type="submit" class="btn btn-sm btn-primary" onclick="exportTable('User')">
-		    <i class="fas fa-file-csv"></i> 
-		  </button>
-		</div>
-	
-	            	
-		<div class="ml-2">
-		  <button type="submit" class="btn btn-sm btn-primary" onclick="addUserModal()">
-		    <i class="fas fa-plus-circle"></i> 
-		  </button>
-		</div>
-	
-	              <div class="ml-2">
-	                <select class="btn btn-sm border" onchange="changeUsersTableLimit(this.value)">
-	                  <option>10</option>
-	                  <option>25</option>
-	                  <option>50</option>
-	                  <option>100</option>
-	                  <option value=''>All</option>
-	                </select>
-	              </div>
-	            </div>
-	          </div>
-	          <div class="card-body">
-		          <div class="table-responsive">
-		            <table class="table table-hover text-nowrap" id="tableUser">
-		              <thead id="userTableHead">
-		                <tr>
-		                	
-	      <th style="width: 50px;">
-	        <input type="checkbox" id="bulkSelectUser" onclick="bulkSelect('User')" name="">
-	      </th>
-		<th><div style="display:flex;"> ID <div style="margin-left: auto;margin-top:3px;">   <i class="bi bi-sort-up sort-icon cursor-p fade-l" style=""  id="idSortASC" onclick="changeUsersTableOrder('id','ASC')"  ></i> <i class="bi bi-sort-down cursor-p sort-icon fade-l"  id="idSortDESC" onclick="changeUsersTableOrder('id','DESC')"  ></i> </div> </div></th><th><div style="display:flex;"> First Name <div style="margin-left: auto;margin-top:3px;">   <i class="bi bi-sort-up sort-icon cursor-p fade-l" style=""  id="first_nameSortASC" onclick="changeUsersTableOrder('first_name','ASC')"  ></i> <i class="bi bi-sort-down cursor-p sort-icon fade-l"  id="first_nameSortDESC" onclick="changeUsersTableOrder('first_name','DESC')"  ></i> </div> </div></th><th><div style="display:flex;"> Last Name <div style="margin-left: auto;margin-top:3px;">   <i class="bi bi-sort-up sort-icon cursor-p fade-l" style=""  id="last_nameSortASC" onclick="changeUsersTableOrder('last_name','ASC')"  ></i> <i class="bi bi-sort-down cursor-p sort-icon fade-l"  id="last_nameSortDESC" onclick="changeUsersTableOrder('last_name','DESC')"  ></i> </div> </div></th><th><div style="display:flex;"> Phone <div style="margin-left: auto;margin-top:3px;">   <i class="bi bi-sort-up sort-icon cursor-p fade-l" style=""  id="phoneSortASC" onclick="changeUsersTableOrder('phone','ASC')"  ></i> <i class="bi bi-sort-down cursor-p sort-icon fade-l"  id="phoneSortDESC" onclick="changeUsersTableOrder('phone','DESC')"  ></i> </div> </div></th><th><div style="display:flex;"> Email <div style="margin-left: auto;margin-top:3px;">   <i class="bi bi-sort-up sort-icon cursor-p fade-l" style=""  id="emailSortASC" onclick="changeUsersTableOrder('email','ASC')"  ></i> <i class="bi bi-sort-down cursor-p sort-icon fade-l"  id="emailSortDESC" onclick="changeUsersTableOrder('email','DESC')"  ></i> </div> </div></th><th><div style="display:flex;"> Role_id <div style="margin-left: auto;margin-top:3px;">   <i class="bi bi-sort-up sort-icon cursor-p fade-l" style=""  id="role_idSortASC" onclick="changeUsersTableOrder('role_id','ASC')"  ></i> <i class="bi bi-sort-down cursor-p sort-icon fade-l"  id="role_idSortDESC" onclick="changeUsersTableOrder('role_id','DESC')"  ></i> </div> </div></th><th>Action</th>
-		                </tr>
-		              </thead>
-		              <tbody id="userTableBody">
-		              </tbody>
-		            </table>
-		          </div>
-		          <div style="float:right;" class="pagination" id="paginationUser">
-		          </div>
-
-	          </div>
-	        </div>
-	      </div><!-- /.container-fluid -->
-		
-            </div>
-            <!-- /.content -->
           </div>
-          <!-- /.content-wrapper -->
-        
-          <!-- Control Sidebar -->
-          <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            <div class="p-3">
-              <h5>Title</h5>
-              <p>Sidebar content</p>
-            </div>
-          </aside>
-          <!-- /.control-sidebar -->
-        
-          <!-- Main Footer -->
-          <footer class="main-footer">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-            </div>
-            <!-- Default to the left -->
-            <small>Copyright &copy; 2021 <a href="https://umbrellasolution.in">Umbrella Solution</a>. All rights reserved.</small>
-          </footer>
+          <!-- /.container-fluid -->
         </div>
-        <!-- ./wrapper -->
-        
-        
-        
-        
-        
-        <!--Modals-->
-        
-        
-			<!-- ADD MODAL Users -->
-			<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog modal-sm">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-			        <button type="button" class="close" data-bs-dismiss="modal"  data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">×</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			          <form action="#" id="addUserForm">
-			          	<label>First Name</label>
-						<input type="text" id="addUserFirstNameInput" name="first_name" class="form-control mb-2" placeholder="First Name" >
-					<label>Last Name</label>
-						<input type="text" id="addUserLastNameInput" name="last_name" class="form-control mb-2" placeholder="Last Name" >
-					<label>Phone</label>
-						<input type="text" id="addUserPhoneInput" name="phone" class="form-control mb-2" placeholder="Phone" >
-					<label>Email</label>
-						<input type="email" id="addUserEmailInput" name="email" class="form-control mb-2" placeholder="Email" >
-					<label>Password</label>
-						<input type="password" id="addUserPasswordInput" name="password" class="form-control mb-2" placeholder="Password" >
-					<label>Role Id</label><select class="form-control mb-2" id="addUserRoleIdInput"><option value="0" > Admin </option><option value="1" > Pharmacies </option></select><button type="submit" class="btn btn-primary btn-sm mt-2" >Submit</button>
-			          </form>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		
-        
-        
-        
-			<!-- EDIT MODAL Users -->
-			<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="UserModalLabel" aria-hidden="true">
-			  <div class="modal-dialog modal-sm">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="UserModalLabel">Edit User</h5>
-			        <button type="button" class="close" data-bs-dismiss="modal"  data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">×</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			          <form action="#" id="editUserForm">
-			          	<label>First Name</label>
-						<input type="text" id="editUserFirstNameInput" name="first_name" class="form-control mb-2" placeholder="First_name" >
-					<label>Last Name</label>
-						<input type="text" id="editUserLastNameInput" name="last_name" class="form-control mb-2" placeholder="Last_name" >
-					<label>Phone</label>
-						<input type="text" id="editUserPhoneInput" name="phone" class="form-control mb-2" placeholder="Phone" >
-					<label>Email</label>
-						<input type="email" id="editUserEmailInput" name="email" class="form-control mb-2" placeholder="Email" >
-					<label>Password</label>
-						<input type="password" id="editUserPasswordInput" name="password" class="form-control mb-2" placeholder="Password" >
-					<label>Role Id</label>
-						<input type="number" id="editUserRoleIdInput" name="role_id" class="form-control mb-2" placeholder="Role Id" >
-					<input type='hidden' id= 'editUserUserId' > <button type="submit" class="btn btn-primary btn-sm mt-2" >Submit</button>
-			          </form>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		
-        
-        
-        <!-- REQUIRED SCRIPTS -->
-        
-        <!-- jQuery -->
-        <script src="./../js/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="./../js/bootstrap.bundle.min.js"></script>
-        <!-- Sweet Alert 4 -->
-        <script src="./../js/sweetalert.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="./../js/adminlte.js"></script>
-        <script src="./../js/dashboard.js"></script>
-        <script src="./../js/common_script.js"></script>
-        <script src="./js/script.js"></script>
-        
-        
-          
-			<script src="./js/user.js"></script>
-		
-        
-        </body>
-        </html>
-        
-              
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+        <div class="p-3">
+          <h5>Title</h5>
+          <p>Sidebar content</p>
+        </div>
+      </aside>
+      <!-- /.control-sidebar -->
+
+      <!-- Main Footer -->
+      <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline"></div>
+        <!-- Default to the left -->
+        <small
+          >Copyright &copy; 2021
+          <a href="https://umbrellasolution.in">Umbrella Solution</a>. All
+          rights reserved.</small
+        >
+      </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!--Modals-->
+
+    <!-- ADD MODAL Users -->
+    <div
+      class="modal fade"
+      id="addUserModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="addUserForm">
+              <label>First Name</label>
+              <input
+                type="text"
+                id="addUserFirstNameInput"
+                name="first_name"
+                class="form-control mb-2"
+                placeholder="First Name"
+              />
+              <label>Last Name</label>
+              <input
+                type="text"
+                id="addUserLastNameInput"
+                name="last_name"
+                class="form-control mb-2"
+                placeholder="Last Name"
+              />
+              <label>Phone</label>
+              <input
+                type="text"
+                id="addUserPhoneInput"
+                name="phone"
+                class="form-control mb-2"
+                placeholder="Phone"
+              />
+              <label>Email</label>
+              <input
+                type="email"
+                id="addUserEmailInput"
+                name="email"
+                class="form-control mb-2"
+                placeholder="Email"
+              />
+              <label>Password</label>
+              <input
+                type="password"
+                id="addUserPasswordInput"
+                name="password"
+                class="form-control mb-2"
+                placeholder="Password"
+              />
+              <label>Role Id</label
+              ><select class="form-control mb-2" id="addUserRoleIdInput">
+                <option value="0">Admin</option>
+                <option value="1">Pharmacies</option></select
+              ><button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL Users -->
+    <div
+      class="modal fade"
+      id="editUserModal"
+      tabindex="-1"
+      aria-labelledby="UserModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="UserModalLabel">Edit User</h5>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#" id="editUserForm">
+              <label>First Name</label>
+              <input
+                type="text"
+                id="editUserFirstNameInput"
+                name="first_name"
+                class="form-control mb-2"
+                placeholder="First_name"
+              />
+              <label>Last Name</label>
+              <input
+                type="text"
+                id="editUserLastNameInput"
+                name="last_name"
+                class="form-control mb-2"
+                placeholder="Last_name"
+              />
+              <label>Phone</label>
+              <input
+                type="text"
+                id="editUserPhoneInput"
+                name="phone"
+                class="form-control mb-2"
+                placeholder="Phone"
+              />
+              <label>Email</label>
+              <input
+                type="email"
+                id="editUserEmailInput"
+                name="email"
+                class="form-control mb-2"
+                placeholder="Email"
+              />
+              <label>Password</label>
+              <input
+                type="password"
+                id="editUserPasswordInput"
+                name="password"
+                class="form-control mb-2"
+                placeholder="Password"
+              />
+              <label>Role Id</label>
+              <input
+                type="number"
+                id="editUserRoleIdInput"
+                name="role_id"
+                class="form-control mb-2"
+                placeholder="Role Id"
+              />
+              <input type="hidden" id="editUserUserId" />
+              <button type="submit" class="btn btn-primary btn-sm mt-2">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="./../js/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="./../js/bootstrap.bundle.min.js"></script>
+    <!-- Sweet Alert 4 -->
+    <script src="./../js/sweetalert.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="./../js/adminlte.js"></script>
+    <script src="./../js/dashboard.js"></script>
+    <script src="./../js/common_script.js"></script>
+    <script src="./js/script.js"></script>
+
+    <script src="./js/user.js"></script>
+  </body>
+</html>

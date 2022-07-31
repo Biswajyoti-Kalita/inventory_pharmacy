@@ -87,12 +87,14 @@ function checkSession(data) {
     console.log("check session expired ", data);
     Cookies.remove("token");
     setTimeout(() => {
-      window.location.href = "index.html?message=token+expired";
+      window.location.href =
+        "index.html?message=Session+expired+due+to+inactivity";
     }, 300);
   } else if (data && data.msg == "please send the token") {
     console.log("check session expired ", data);
     setTimeout(() => {
-      window.location.href = "index.html?message=token+expired";
+      window.location.href =
+        "index.html?message=Session+expired+due+to+inactivity";
     }, 300);
   }
   return;

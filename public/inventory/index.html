@@ -129,9 +129,12 @@
         if (msg && msg.indexOf("?message=") == 0) {
           console.log("insde");
           $(".alert").addClass("show");
-          $("#errMsg").html(
-            `${location.search.replace("?message=", "").replace("+", " ")}`
+          $("#errMsg").html(`Session expired due to inactivity`);
+
+          /*$("#errMsg").html(
+          `${location.search.replace("?message=", "").replace("+", " ")}`
           );
+          */
         }
       });
     </script>
