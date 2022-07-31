@@ -85,11 +85,15 @@ function decodePermissions(val) {
 function checkSession(data) {
   if (data && data.status == "error" && data.msg?.name == "TokenExpiredError") {
     Cookies.remove("token");
-    location.href = "index.html?message=token+expired";
+    setTimeout(() => {
+      window.location.href = "index.html?message=token+expired";
+    }, 300);
   } else if (data && data.msg == "please send the token") {
     console.log("check session expired ", data);
     Cookies.remove("token");
-    location.href = "index.html?message=token+expired";
+    setTimeout(() => {
+      window.location.href = "index.html?message=token+expired";
+    }, 300);
   }
   return;
 }
