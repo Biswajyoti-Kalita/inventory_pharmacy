@@ -87,6 +87,10 @@ function checkSession(data) {
     console.log("check session expired ", data);
     Cookies.remove("token");
     location.href = "index.html?message=token+expired";
+  } else if (data && data.msg == "please send the token") {
+    console.log("check session expired ", data);
+    Cookies.remove("token");
+    location.href = "index.html?message=token+expired";
   }
   return;
 }
