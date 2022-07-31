@@ -140,24 +140,24 @@ module.exports = {
           });
 
           if (checkPharmacyProfileExist) {
-            await db.pharmacy_profile.update(
-              {
-                name: req.body.name,
-                regn_no: req.body.regn_no,
-                address_1: req.body.address_1,
-                address_2: req.body.address_2,
-                city: req.body.city,
-                state: req.body.state,
-                zip: req.body.zip,
-                email: req.body.email,
-                phone: req.body.phone,
+            let obj = {
+              name: req.body.name,
+              regn_no: req.body.regn_no,
+              address_1: req.body.address_1,
+              address_2: req.body.address_2,
+              city: req.body.city,
+              state: req.body.state,
+              zip: req.body.zip,
+              email: req.body.email,
+              phone: req.body.phone,
+            };
+
+            if (req.body.stripe_id) obj["stripe_id"] = req.body.stripe_id;
+            await db.pharmacy_profile.update(obj, {
+              where: {
+                id: req.pharmacy_user_id,
               },
-              {
-                where: {
-                  id: req.pharmacy_user_id,
-                },
-              }
-            );
+            });
             res.send({
               status: "success",
               message: "done",
@@ -296,6 +296,7 @@ module.exports = {
               "owner_name",
               "owner_email",
               "owner_contact",
+              "stripe_id",
             ],
           });
           res.send(pharmacy_profile);

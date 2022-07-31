@@ -14,7 +14,7 @@ var file_upload = require("./../../services/upload");
 var roleService = require("./../../services/roleService");
 var passwordService = require("./../../services/passwordService");
 const axiosService = require("../../services/axiosService");
-
+const Stripe = require("stripe");
 module.exports = {
   initializeApi: function (app) {
     const basic_attributes = ["createdAt", "updatedAt"];
@@ -49,6 +49,22 @@ module.exports = {
             insurance_company_id,
           } = req.body;
           console.log("payment type");
+          const pharmacy_profile = await db.pharmacy_profile.findOne({
+            where: {
+              id: req.pharmacy_user_id,
+            },
+          });
+
+          if (payment_type == 4) {
+            // check
+            if (!pharmacy_profile.stripe_id) {
+              return res.send({
+                status: "error",
+                message: "Please update stripe on profile",
+              });
+            }
+          }
+
           if (cheque_date) {
             let datecheck5 = new Date(cheque_date);
             var timestamp5 = Date.parse(datecheck5);
@@ -203,10 +219,65 @@ module.exports = {
             }
           }
 
-          res.send({
-            status: "success",
-            message: "done",
-          });
+          if (payment_type == 4) {
+            let stripe = Stripe(pharmacy_profile.stripe_id);
+            let price_id = "";
+            // const checkPriceExist = await stripe.prices.search({
+            //   query: `unit_amount : ${+total_price}`,
+            // });
+
+            // if (
+            //   checkPriceExist &&
+            //   checkPriceExist.data &&
+            //   checkPriceExist.data.length
+            // ) {
+            //   price_id = checkPriceExist.data[0].id;
+            // } else {
+            //   const price = await stripe.prices.create({
+            //     unit_amount: +total_price,
+            //     currency: "usd",
+            //     product: "prod_" + total_price,
+            //   });
+            //   price_id = price.id;
+            // }
+            let am = +total_price - (discount ? discount : 0);
+            const product = await stripe.products.create({
+              name: "prod_" + am,
+            });
+            const price = await stripe.prices.create({
+              unit_amount: am * 100,
+              currency: process.env.CURRENCY,
+              product: product.id,
+            });
+            price_id = price.id;
+
+            const session = await stripe.checkout.sessions.create({
+              line_items: [
+                {
+                  price: price_id,
+                  quantity: 1,
+                },
+              ],
+              mode: "payment",
+              success_url: `${process.env.BASE_URL}/pharmacies/stripe/paymentsuccess/${data2.id}`,
+              cancel_url: `${process.env.BASE_URL}/pharmacies/stripe/paymentfailed/${data2.id}`,
+            });
+            console.log(session);
+            await db.transaction.create({
+              order_id: data2.id,
+            });
+            return res.send({
+              status: "success",
+              message: "done",
+              url: session.url,
+            });
+          } else {
+            return res.send({
+              status: "success",
+              message: "done",
+              url: "",
+            });
+          }
         } catch (error) {
           console.log(error);
           res.send({
@@ -235,6 +306,161 @@ module.exports = {
               console.log("\n\n\n reduce refill ", result);
 
  */
+
+    app.post(
+      "/pharmacies/stripe/retrypayment",
+      roleService.verifyRole(role),
+      async function (req, res) {
+        try {
+          const { order_id } = req.body;
+
+          await db.transaction.destroy({
+            where: {
+              order_id,
+            },
+          });
+          await db.transaction.create({
+            order_id,
+          });
+          const pharmacy_profile = await db.pharmacy_profile.findOne({
+            where: {
+              id: req.pharmacy_user_id,
+            },
+          });
+          if (!pharmacy_profile.stripe_id) {
+            return res.send({
+              status: "error",
+              message: "Striped ID missing",
+            });
+          }
+          const order = await db.order.findByPk(order_id);
+          if (!order) {
+            return res.send({
+              status: "error",
+              message: "Order does not exist",
+            });
+          }
+
+          let stripe = Stripe(pharmacy_profile.stripe_id);
+          let price_id = "";
+          // const checkPriceExist = await stripe.prices.search({
+          //   query: `unit_amount : ${+order.amount}`,
+          // });
+
+          // if (
+          //   checkPriceExist &&
+          //   checkPriceExist.data &&
+          //   checkPriceExist.data.length
+          // ) {
+          //   price_id = checkPriceExist.data[0].id;
+          // } else {
+          //   const price = await stripe.prices.create({
+          //     unit_amount: +order.amount,
+          //     currency: "usd",
+          //     product: "prod_" + order.amount,
+          //   });
+          //   price_id = price.id;
+          // }
+          let am = order.amount - order.discount;
+
+          const product = await stripe.products.create({
+            name: "prod_" + am,
+          });
+          const price = await stripe.prices.create({
+            unit_amount: am * 100,
+            currency: process.env.CURRENCY,
+            product: product.id,
+          });
+          price_id = price.id;
+
+          const session = await stripe.checkout.sessions.create({
+            line_items: [
+              {
+                price: price_id,
+                quantity: 1,
+              },
+            ],
+            mode: "payment",
+            success_url: `${process.env.BASE_URL}/pharmacies/stripe/paymentsuccess/${order_id}`,
+            cancel_url: `${process.env.BASE_URL}/pharmacies/stripe/paymentfailed/${order_id}`,
+          });
+          return res.send({
+            status: "success",
+            message: "done",
+            url: session.url,
+          });
+        } catch (err) {
+          return res.send({
+            status: "error",
+            message: err,
+          });
+        }
+      }
+    );
+
+    app.get(
+      "/pharmacies/stripe/paymentsuccess/:order_id",
+      async function (req, res) {
+        try {
+          console.log("payment success ", req.params.order_id);
+          const transaction = await db.transaction.findOne({
+            where: {
+              order_id: req.params.order_id,
+            },
+          });
+          console.log(transaction);
+          if (!transaction) {
+            return res.send({
+              status: "error",
+              message: "Transaction does not exist",
+            });
+          }
+          if (transaction.payment_status == 1) {
+            return res.send({
+              status: "error",
+              message: "Payment status already updated",
+            });
+          }
+          await db.transaction.update(
+            {
+              payment_status: 1,
+            },
+            {
+              where: {
+                order_id: req.params.order_id,
+              },
+            }
+          );
+          res.redirect("/pharmacies/patient_order.html");
+        } catch (err) {}
+      }
+    );
+
+    app.get(
+      "/pharmacies/stripe/paymentfailed/:order_id",
+      async function (req, res) {
+        try {
+          const transaction = await db.transaction.findOne({
+            order_id: req.params.order_id,
+          });
+          if (!transaction) {
+            return res.send({
+              status: "error",
+              message: "Transaction does not exist",
+            });
+          }
+          if (transaction.payment_status == 2) {
+            return res.send({
+              status: "error",
+              message: "Payment status already updated",
+            });
+          }
+          transaction.payment_status = 2;
+          await transaction.save();
+          res.redirect("/pharmacies/patient_order.html");
+        } catch (err) {}
+      }
+    );
 
     app.post(
       "/pharmacies/dispenseorder",
@@ -433,7 +659,7 @@ module.exports = {
           where["order_date"] = req.body.order_date;
 
         try {
-          const orders = await db.order.findAndCountAll({
+          let { rows, count } = await db.order.findAndCountAll({
             where: where,
             offset: req.body.offset ? +req.body.offset : null,
             limit: req.body.limit ? +req.body.limit : 25,
@@ -453,7 +679,20 @@ module.exports = {
               },
             ],
           });
-          res.send(orders);
+          const transaction = await db.transaction.findAll();
+          let transactionObj = {};
+
+          for (let i = 0; i < transaction.length; i++) {
+            transactionObj[transaction[i].order_id] = transaction[i].dataValues;
+          }
+
+          for (let i = 0; i < rows.length; i++) {
+            if (transactionObj[rows[i].id]) {
+              rows[i]["dataValues"]["trans"] = transactionObj[rows[i].id];
+            }
+          }
+
+          res.send({ rows, count });
         } catch (error) {
           console.log(error);
           res.send({
