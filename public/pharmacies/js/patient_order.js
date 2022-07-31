@@ -122,7 +122,7 @@ function getOrders(searchObj) {
               );
             }
             payment_information = `
-            Stripe payment : ${paymentStatus} <br /> ${btn}
+            ${paymentStatus} <br /> ${btn}
           `;
           }
         }
@@ -187,7 +187,7 @@ function getOrders(searchObj) {
 					<td>${
             result[i]
               ? result[i].payment_type != null
-                ? ["Cash", "Cheque", "Online", "Insurance", "Stripe"][
+                ? ["Cash", "Cheque", "Online", "Insurance", "Credit/Debit"][
                     result[i].payment_type
                   ]
                 : " "

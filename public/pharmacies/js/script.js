@@ -86,7 +86,16 @@ function checkSession(data) {
   if (data && data.status == "error" && data.msg?.name == "TokenExpiredError") {
     console.log("check session expired ", data);
     Cookies.remove("token");
-    location.href = "index.html?message=token+expired";
+    setTimeout(() => {
+      window.location.href =
+        "index.html?message=Session+expired+due+to+inactivity";
+    }, 300);
+  } else if (data && data.msg == "please send the token") {
+    console.log("check session expired ", data);
+    setTimeout(() => {
+      window.location.href =
+        "index.html?message=Session+expired+due+to+inactivity";
+    }, 300);
   }
   return;
 }
