@@ -100,6 +100,31 @@ function getOrders(searchObj) {
           } 
 
           `;
+        } else if (result[i].payment_type == 4) {
+          let btn = "";
+          let paymentStatus = "";
+          if (result[i].trans) {
+            if (result[i].trans.payment_status != 1)
+              btn = `<span class="btn btn-sm btn-primary" onclick="retryPayment('${result[i].id}')" >retry</span>`;
+
+            if (
+              result[i].trans &&
+              parseInt(result[i].trans.payment_status) >= 0
+            ) {
+              paymentStatus = ["pending", "paid", "failed"][
+                result[i].trans.payment_status
+              ];
+              console.log(
+                " payment status ",
+                result[i].trans.payment_status,
+                " ",
+                paymentStatus
+              );
+            }
+            payment_information = `
+            Stripe payment : ${paymentStatus} <br /> ${btn}
+          `;
+          }
         }
 
         if (result[i].status == 0) {
@@ -162,7 +187,7 @@ function getOrders(searchObj) {
 					<td>${
             result[i]
               ? result[i].payment_type != null
-                ? ["Cash", "Cheque", "Online", "Insurance"][
+                ? ["Cash", "Cheque", "Online", "Insurance", "Stripe"][
                     result[i].payment_type
                   ]
                 : " "
@@ -252,6 +277,20 @@ $("#searchOrderForm").on("submit", (ev) => {
     });
   getOrders(searchObj);
 });
+
+function retryPayment(order_id) {
+  $.ajax({
+    url: "/pharmacies/stripe/retrypayment",
+    method: "POST",
+    data: {
+      order_id,
+      token: Cookies.get("token"),
+    },
+    success: function (result) {
+      if (result.status == "success") location.href = result.url;
+    },
+  });
+}
 
 function addOrder() {
   $.ajax({

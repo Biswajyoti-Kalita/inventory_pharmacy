@@ -51,10 +51,19 @@ function getPharmacy_profiles(searchObj) {
         $("#viewPharmacy_profileOwnerNameInput").text(result.owner_name);
         $("#viewPharmacy_profileOwnerContactInput").text(result.owner_contact);
         $("#viewPharmacy_profileOwnerEmailInput").text(result.owner_email);
+        $("#viewPharmacy_profileStripeIDInput").text(
+          result.stripe_id ? result.stripe_id : ""
+        );
 
         if (isSuperUser)
           $("#updateBtnDiv").html(`
-          <button class="btn btn-primary" onclick="editPharmacyProfileModal('${result.regn_no}','${result.address_1}','${result.address_2}','${result.city}','${result.state}','${result.zip}','${result.email}','${result.phone}','${result.id}')" >Edit</button>
+          <button class="btn btn-primary" onclick="editPharmacyProfileModal('${
+            result.regn_no
+          }','${result.address_1}','${result.address_2}','${result.city}','${
+            result.state
+          }','${result.zip}','${result.email}','${result.phone}', '${
+            result.stripe_id ? result.stripe_id : ""
+          }','${result.id}')" >Edit</button>
         `);
       } else {
         $("#updateBtnDiv").html("");
@@ -92,6 +101,7 @@ function updatePharmacy_profile() {
       zip: $("#editPharmacyProfileZipInput").val(),
       email: $("#editPharmacyProfileEmailInput").val(),
       phone: $("#editPharmacyProfilePhoneInput").val(),
+      stripe_id: $("#editPharmacyProfileStripeIDInput").val(),
       id: $("#editPharmacyProfilePharmacy_profileId").val(),
       token: Cookies.get("token"),
     },
@@ -130,6 +140,7 @@ function editPharmacyProfileModal(
   zip,
   email,
   phone,
+  stripe_id,
   id
 ) {
   $("#editPharmacyProfileModal").modal("show");
@@ -142,6 +153,7 @@ function editPharmacyProfileModal(
   $("#editPharmacyProfileZipInput").val(zip);
   $("#editPharmacyProfileEmailInput").val(email);
   $("#editPharmacyProfilePhoneInput").val(phone);
+  $("#editPharmacyProfileStripeIDInput").val(stripe_id);
 }
 $("#editPharmacyProfileForm").on("submit", (ev) => {
   ev.preventDefault();

@@ -83,7 +83,8 @@ function decodePermissions(val) {
 }
 
 function checkSession(data) {
-  if (data.status == "error" && data.msg?.name == "TokenExpiredError") {
+  if (data && data.status == "error" && data.msg?.name == "TokenExpiredError") {
+    console.log("check session expired ", data);
     Cookies.remove("token");
     location.href = "index.html?message=token+expired";
   }

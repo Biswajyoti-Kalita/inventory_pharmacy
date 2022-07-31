@@ -653,7 +653,8 @@ function submitCart() {
       if (result.status == "success") {
         swal("Success", "Ordered made successfully", "success");
         setTimeout(() => {
-          location.href = location.href;
+          if (result.url && result.url.length) location.href = result.url;
+          else location.href = location.href;
         }, 1200);
       } else {
         swal("Error", result.message, "error");
