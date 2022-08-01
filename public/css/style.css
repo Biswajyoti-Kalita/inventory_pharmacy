@@ -16,3 +16,15 @@
 .hide {
   display: none;
 }
+.main-sidebar {
+  background-color: #323584;
+}
+
+.sidebar a {
+  color: #fff !important;
+}
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+  background-color: #f4f4f4 !important;
+  color: #323584 !important;
+}
